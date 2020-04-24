@@ -1,32 +1,12 @@
-# Extending image
-FROM node
-
-# Create app directory
-RUN mkdir -p /usr/src/app
+FROM node as build-deps
 WORKDIR /usr/src/app
-
-# Versions
-RUN npm -v
-RUN node -v
-
-# Install app dependencies
-COPY package.json /usr/src/app/
-COPY package-lock.json /usr/src/app/
-
+COPY package.json package-lock.json ./
 RUN npm install
+COPY . ./
+RUN npm run-script build
 
-# Bundle app source
-COPY . /usr/src/app
-
-# Port to listener
-EXPOSE 3000
-
-# Environment variables
-ENV NODE_ENV production
-ENV PORT 3000
-ENV PUBLIC_PATH "/"
-
-RUN npm run start:build
-
-# Main command
-CMD [ "npm", "run", "start:server" ]
+# Stage 2 - the production environment
+FROM nginx
+COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
