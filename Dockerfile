@@ -1,3 +1,4 @@
+# Stage 1 - production build
 FROM node as build-deps
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
