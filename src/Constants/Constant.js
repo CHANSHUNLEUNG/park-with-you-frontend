@@ -1,0 +1,1 @@
+export const TEST_PARKING_LOT_LIST = [{id: 1},{id: 2}];
