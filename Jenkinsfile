@@ -7,7 +7,7 @@ node {
     stage('Deploy') {
         sh 'docker container ls -a -fname=react-dev -q | xargs -r docker container rm --force'
         sh 'docker run --rm -d -p 9200:80 --network=tatp --name react-dev tatp-react-frontend'
-        sh 'docker system prune'
+        sh 'docker system prune -f'
     }
   }
   catch (err) {
