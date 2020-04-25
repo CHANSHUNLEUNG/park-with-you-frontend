@@ -1,12 +1,12 @@
 .topright {
     position: absolute;
-    top: 25px;
+    top: 15px;
     right: -440px;
-    font-size: 18px;
+    font-size: 12px;
     display: "inline-block";
     line-height: 1.2;
   }
-  .photo {
+  .userIcon {
     height: 90px;
     width: 90px;
     border-radius: 50%;
@@ -33,7 +33,6 @@
   .homePageHeader {
     color:rgb(239, 240, 241);
     height:110px;
-    background-color: rgb(101, 22, 230);
     background-image: url("images/Background.jpg");
 }
 
@@ -42,3 +41,4 @@
   display: "inline-block";
   font-family: 'Franklin Gothic Medium';
 }
+

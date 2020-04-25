@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import logo from "./images/parking_logo.png";
 import cat from "./images/CAT.JPG";
 import "./MainHeader.css";
-import { Row, Col, Divider, Layout, Button, PageHeader } from "antd";
+import { UserOutlined, LogoutOutlined} from '@ant-design/icons';
+import { Row, Col, Layout, Button } from "antd";
 
 const { Header, Footer, Sider, Content } = Layout;
 const style = { background: "#0092ff", padding: "8px 0" };
@@ -38,14 +39,15 @@ export default class ParkingLotMainHeader extends Component {
             <div>
               <Row gutter={16}>
                 <Col className="gutter-row" span={15}>
-                  <div style={{ display: "inline-block" }} className="topright">
-                    <Button>User Name</Button>
+                  <div className="topright">
+                    <Button shape="round" icon={<UserOutlined/>} size = 'medium'>User Name</Button>
                     <br />
-                    <Button>Sign Out</Button>
+                    <br />
+                    <Button shape="round" icon={<LogoutOutlined />} size = 'medium'>Sign Out</Button>
                   </div>
                 </Col>
                 <Col className="gutter-row" span={15}>
-                  <img src={cat} className="photo" />
+                  <img src={cat} className="userIcon" />
                 </Col>
               </Row>
             </div>
