@@ -40,6 +40,17 @@ export default class ParkingLotHomeContainer extends Component {
         })
     }
 
+    sortParkingLotsByAvailableCount(){
+        let cloneParkingLotsInfo = this.state.parkingLotsInfo.slice();
+        let sortedData = cloneParkingLotsInfo.sort((first,second) => {
+            return first["available_count"] - second["available_count"];
+        })
+
+        this.setState({
+            parkingLotsInfo: sortedData
+        })
+    }
+
     updateParkingLotsInfo() {
         axios.get(BACKEND_HOST_URL + PARKING_LOT_INFO_PATH).then(response => {
             (response.status === 200) ? this.setState({
