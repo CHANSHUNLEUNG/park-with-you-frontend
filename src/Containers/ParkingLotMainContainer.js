@@ -13,11 +13,11 @@ export default class ParkingLotMain extends Component {
                 <Row>
 
                     <Col span={24}>
-                        <Row gutter={[16, 50]} justify="center" >
-                            <Col span={10}>
+                        {/* <Row gutter={[16, 50]} justify="center" >
+                            <Col span={10}> */}
                                 <ParkingLotMainHeader />
-                            </Col>
-                        </Row>
+                            {/* </Col>
+                        </Row> */}
                     </Col>
 
                     <Col span={24}>
