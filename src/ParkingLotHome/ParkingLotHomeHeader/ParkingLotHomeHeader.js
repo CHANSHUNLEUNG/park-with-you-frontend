@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import logo from "../images/parking_logo.png";
 import cat from "../images/CAT.JPG";
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined, LogoutOutlined} from '@ant-design/icons';
 import { Row, Col, Layout, Button } from "antd";
 
-const { Header, Footer, Sider, Content } = Layout;
-const style = { background: "#0092ff", padding: "8px 0" };
+const { Header } = Layout;
 
 export default class ParkingLotHomeHeader extends Component {
   constructor(props) {

@@ -4,7 +4,6 @@ import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
 import ParkingLotHomeBodyHeader from '../ParkingLotHomeBody/ParkingLotHomeBodyHeader';
 import ParkingLotHomeBodyList from '../ParkingLotHomeBody/ParkingLotHomeBodyList';
-import ParkingLotHomeBodyListHeader from '../ParkingLotHomeBody/ParkingLotHomeBodyListHeader';
 
 export default class ParkingLotHomeBodyContainer extends Component {
     render() {
@@ -26,14 +25,6 @@ export default class ParkingLotHomeBodyContainer extends Component {
                                 <ParkingLotHomeBodyList
                                     sortParkingLotsByPrice={this.props.sortParkingLotsByPrice}
                                     parkingLotsInfo={this.props.parkingLotsInfo} />
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    <Col span={24}>
-                        <Row justify="center">
-                            <Col span={10}>
-                                <ParkingLotHomeBodyListHeader />
                             </Col>
                         </Row>
                     </Col>

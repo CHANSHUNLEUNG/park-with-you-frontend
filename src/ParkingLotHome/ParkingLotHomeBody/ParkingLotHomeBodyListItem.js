@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Typography, Button } from 'antd';
+import { Button } from 'antd';
 import { BookFilled } from '@ant-design/icons';
-import { List, message, Avatar, Spin } from 'antd';
-
-const { Text } = Typography;
+import { List } from 'antd';
 
 export default class ParkingLotHomeBodyListItem extends Component {
     render() {
