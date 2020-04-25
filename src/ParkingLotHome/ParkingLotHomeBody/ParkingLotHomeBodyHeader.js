@@ -6,7 +6,7 @@ export default class ParkingLotHomeBodyHeader extends Component {
     render() {
         return (
             <div>
-                <PageHeader title="Todo List" />
+                <PageHeader title="Parking Lots" />
             </div>
         )
     }

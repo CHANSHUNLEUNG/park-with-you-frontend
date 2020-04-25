@@ -13,9 +13,9 @@ export default class ParkingLotHomeBodyContainer extends Component {
                 <Row>
 
                     <Col span={24}>
-                        <Row gutter={[16, 50]} justify="center" >
+                        <Row gutter={[16]} justify="center" >
                             <Col span={10}>
-                            <ParkingLotHomeBodyHeader />
+                                <ParkingLotHomeBodyHeader />
                             </Col>
                         </Row>
                     </Col>
@@ -23,7 +23,9 @@ export default class ParkingLotHomeBodyContainer extends Component {
                     <Col span={24}>
                         <Row gutter={[16, 50]} justify="center">
                             <Col span={10}>
-                                <ParkingLotHomeBodyList />
+                                <ParkingLotHomeBodyList
+                                    sortParkingLotsByPrice={this.props.sortParkingLotsByPrice}
+                                    parkingLotsInfo={this.props.parkingLotsInfo} />
                             </Col>
                         </Row>
                     </Col>
