@@ -11,8 +11,9 @@ export default class ParkingLotHomeContainer extends Component {
     constructor(props) {
         super(props)
 
-        this.sortParkingLotsByPrice = this.sortParkingLotsByPrice.bind(this);
         this.updateParkingLotsInfo = this.updateParkingLotsInfo.bind(this);
+        this.sortParkingLotsByPrice = this.sortParkingLotsByPrice.bind(this);
+        this.sortParkingLotsByAvailable = this.sortParkingLotsByAvailable.bind(this);
 
         this.state = {
             parkingLotsInfo: []
@@ -23,7 +24,7 @@ export default class ParkingLotHomeContainer extends Component {
         // static test
         this.setState({
             parkingLotsInfo: TEST_PARKING_LOT_LIST
-        });
+        },this.sortParkingLotsByPrice());
 
         // production
         // this.updateParkingLotsInfo();
@@ -40,7 +41,7 @@ export default class ParkingLotHomeContainer extends Component {
         })
     }
 
-    sortParkingLotsByAvailableCount(){
+    sortParkingLotsByAvailable(){
         let cloneParkingLotsInfo = this.state.parkingLotsInfo.slice();
         let sortedData = cloneParkingLotsInfo.sort((first,second) => {
             return first["available_count"] - second["available_count"];
@@ -73,6 +74,7 @@ export default class ParkingLotHomeContainer extends Component {
                     <Col span={24}>
                         <ParkingLotHomeBodyContainer 
                         sortParkingLotsByPrice={this.sortParkingLotsByPrice}
+                        sortParkingLotsByAvailable={this.sortParkingLotsByAvailable}
                         parkingLotsInfo={this.state.parkingLotsInfo} />
                     </Col>
 

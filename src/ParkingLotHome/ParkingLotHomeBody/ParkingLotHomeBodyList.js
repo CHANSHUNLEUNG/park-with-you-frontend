@@ -8,7 +8,10 @@ export default class ParkingLotHomeBodyList extends Component {
         return (
             <>
                 <List
-                    header={<ParkingLotHomeBodyListHeader />}
+                    header={<ParkingLotHomeBodyListHeader
+                        sortParkingLotsByPrice={this.props.sortParkingLotsByPrice}
+                        sortParkingLotsByAvailable={this.props.sortParkingLotsByAvailable}
+                    />}
                     bordered
                     dataSource={this.props.parkingLotsInfo}
                     renderItem={item => (

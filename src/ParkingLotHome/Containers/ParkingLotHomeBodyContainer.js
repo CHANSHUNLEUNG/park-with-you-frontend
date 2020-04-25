@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
 import ParkingLotHomeBodyHeader from '../ParkingLotHomeBody/ParkingLotHomeBodyHeader';
@@ -24,6 +23,7 @@ export default class ParkingLotHomeBodyContainer extends Component {
                             <Col span={10}>
                                 <ParkingLotHomeBodyList
                                     sortParkingLotsByPrice={this.props.sortParkingLotsByPrice}
+                                    sortParkingLotsByAvailable={this.props.sortParkingLotsByAvailable}
                                     parkingLotsInfo={this.props.parkingLotsInfo} />
                             </Col>
                         </Row>
