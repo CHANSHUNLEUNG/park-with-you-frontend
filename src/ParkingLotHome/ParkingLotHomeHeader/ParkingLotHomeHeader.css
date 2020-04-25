@@ -33,7 +33,7 @@
   .homePageHeader {
     color:rgb(239, 240, 241);
     height:110px;
-    background-image: url("images/Background.jpg");
+    background-image: url("../images/Background.jpg");
 }
 
 .slogan {
