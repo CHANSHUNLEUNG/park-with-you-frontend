@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class ParkingLotMainListHeader extends Component {
+export default class ParkingLotHomeBodyListHeader extends Component {
     render() {
         return (
             <>

@@ -2,24 +2,28 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
-import ParkingLotMainHeader from '../ParkingLotMain/ParkingLotMainHeader';
-import ParkingLotMainList from '../ParkingLotMain/ParkingLotMainList';
-import ParkingLotMainListHeader from '../ParkingLotMain/ParkingLotMainListHeader';
+import ParkingLotHomeBodyHeader from '../ParkingLotHomeBody/ParkingLotHomeBodyHeader';
+import ParkingLotHomeBodyList from '../ParkingLotHomeBody/ParkingLotHomeBodyList';
+import ParkingLotHomeBodyListHeader from '../ParkingLotHomeBody/ParkingLotHomeBodyListHeader';
 
-export default class ParkingLotMain extends Component {
+export default class ParkingLotHomeBodyContainer extends Component {
     render() {
         return (
             <>
                 <Row>
 
                     <Col span={24}>
-                                <ParkingLotMainHeader />
+                        <Row gutter={[16, 50]} justify="center" >
+                            <Col span={10}>
+                            <ParkingLotHomeBodyHeader />
+                            </Col>
+                        </Row>
                     </Col>
 
                     <Col span={24}>
                         <Row gutter={[16, 50]} justify="center">
                             <Col span={10}>
-                                <ParkingLotMainList />
+                                <ParkingLotHomeBodyList />
                             </Col>
                         </Row>
                     </Col>
@@ -27,7 +31,7 @@ export default class ParkingLotMain extends Component {
                     <Col span={24}>
                         <Row justify="center">
                             <Col span={10}>
-                                <ParkingLotMainListHeader />
+                                <ParkingLotHomeBodyListHeader />
                             </Col>
                         </Row>
                     </Col>

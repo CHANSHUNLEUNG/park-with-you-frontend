@@ -1,10 +1,10 @@
 import React from 'react';
-import ParkingLotMain from './Containers/ParkingLotMainContainer';
+import ParkingLotHomeBodyContainer from './ParkingLotHome/Containers/ParkingLotHomeBodyContainer';
 
 function App() {
   return (
     <>
-      <ParkingLotMain />
+      <ParkingLotHomeBodyContainer />
     </>
   );
 }

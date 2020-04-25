@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class ParkingLotMainListItem extends Component {
+export default class ParkingLotHomeBodyListItem extends Component {
     render() {
         return (
             <div>

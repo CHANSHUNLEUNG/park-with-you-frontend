@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { List } from 'antd';
-import ParkingLotMainListItem from './ParkingLotMainListItem';
+import ParkingLotHomeBodyListItem from './ParkingLotHomeBodyListItem';
 import { TEST_PARKING_LOT_LIST } from '../Constants/Constant';
 
-export default class ParkingLotMainList extends Component {
+export default class ParkingLotHomeBodyList extends Component {
     render() {
         return (
             <>
@@ -12,7 +12,7 @@ export default class ParkingLotMainList extends Component {
                     dataSource={TEST_PARKING_LOT_LIST}
                     renderItem={item => (
                         <List.Item key={item.id}>
-                            <ParkingLotMainListItem />
+                            <ParkingLotHomeBodyListItem />
                         </List.Item>
                     )}
                 />

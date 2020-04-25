@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import logo from "./images/parking_logo.png";
-import cat from "./images/CAT.JPG";
-import "./MainHeader.css";
+import logo from "../images/parking_logo.png";
+import cat from "../images/CAT.JPG";
+import "./ParkingLotHomeHeader.css";
 import { UserOutlined, LogoutOutlined} from '@ant-design/icons';
 import { Row, Col, Layout, Button } from "antd";
 
 const { Header, Footer, Sider, Content } = Layout;
 const style = { background: "#0092ff", padding: "8px 0" };
 
-export default class ParkingLotMainHeader extends Component {
+export default class ParkingLotHomeHeader extends Component {
   constructor(props) {
     super(props);
 
