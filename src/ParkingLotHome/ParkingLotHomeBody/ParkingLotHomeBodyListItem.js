@@ -28,8 +28,8 @@ export default class ParkingLotHomeBodyListItem extends Component {
                 />
                 <Button type="primary"
                     shape="circle"
-                    icon={<BookFilled />} 
-                    />
+                    icon={<BookFilled />}
+                />
 
             </>
         )

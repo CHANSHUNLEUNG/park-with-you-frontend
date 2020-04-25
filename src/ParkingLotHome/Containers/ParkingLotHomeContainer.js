@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Row, Col } from 'antd';
 import ParkingLotHomeBodyContainer from './ParkingLotHomeBodyContainer'
 import ParkingLotHomeHeaderContainer from './ParkingLotHomeHeaderContainer'
-import { BACKEND_HOST_URL, PARKING_LOT_INFO_PATH,TEST_PARKING_LOT_LIST } from '../Constants/Constant';
+import { BACKEND_HOST_URL, PARKING_LOT_INFO_PATH, TEST_PARKING_LOT_LIST } from '../Constants/Constant';
 
 
 export default class ParkingLotHomeContainer extends Component {
@@ -20,19 +20,19 @@ export default class ParkingLotHomeContainer extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // static test
-        this.setState({
-            parkingLotsInfo: TEST_PARKING_LOT_LIST
-        },this.sortParkingLotsByPrice());
+        // this.setState({
+        //     parkingLotsInfo: TEST_PARKING_LOT_LIST
+        // }, this.sortParkingLotsByPrice());
 
         // production
-        // this.updateParkingLotsInfo();
+        this.updateParkingLotsInfo();
     }
 
-    sortParkingLotsByPrice(){
+    sortParkingLotsByPrice() {
         let cloneParkingLotsInfo = this.state.parkingLotsInfo.slice();
-        let sortedData = cloneParkingLotsInfo.sort((first,second) => {
+        let sortedData = cloneParkingLotsInfo.sort((first, second) => {
             return first["unit_price"] - second["unit_price"];
         })
 
@@ -41,9 +41,9 @@ export default class ParkingLotHomeContainer extends Component {
         })
     }
 
-    sortParkingLotsByAvailable(){
+    sortParkingLotsByAvailable() {
         let cloneParkingLotsInfo = this.state.parkingLotsInfo.slice();
-        let sortedData = cloneParkingLotsInfo.sort((first,second) => {
+        let sortedData = cloneParkingLotsInfo.sort((first, second) => {
             return first["available_count"] - second["available_count"];
         })
 
@@ -72,10 +72,10 @@ export default class ParkingLotHomeContainer extends Component {
                     </Col>
 
                     <Col span={24}>
-                        <ParkingLotHomeBodyContainer 
-                        sortParkingLotsByPrice={this.sortParkingLotsByPrice}
-                        sortParkingLotsByAvailable={this.sortParkingLotsByAvailable}
-                        parkingLotsInfo={this.state.parkingLotsInfo} />
+                        <ParkingLotHomeBodyContainer
+                            sortParkingLotsByPrice={this.sortParkingLotsByPrice}
+                            sortParkingLotsByAvailable={this.sortParkingLotsByAvailable}
+                            parkingLotsInfo={this.state.parkingLotsInfo} />
                     </Col>
 
                 </Row>

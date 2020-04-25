@@ -5,7 +5,7 @@ export default class ParkingLotHomeHeaderContainer extends Component {
     render() {
         return (
             <>
-              <ParkingLotHomeHeader />  
+                <ParkingLotHomeHeader />
             </>
         )
     }
