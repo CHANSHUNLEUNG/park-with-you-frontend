@@ -4,7 +4,8 @@ import axios from 'axios';
 import { Row, Col } from 'antd';
 import ParkingLotHomeBodyContainer from './ParkingLotHomeBodyContainer'
 import ParkingLotHomeHeaderContainer from './ParkingLotHomeHeaderContainer'
-import { BACKEND_HOST_URL, PARKING_LOT_INFO_PATH, TEST_PARKING_LOT_LIST } from '../Constants/Constant';
+import ParkingLotHomeMainContentContainer from './ParkingLotHomeMainContentContainer'
+import { BACKEND_HOST_URL, PARKING_LOT_INFO_PATH, TEST_PARKING_LOT_LIST, INIT_CUSTOMERS_INFO } from '../Constants/Constant';
 
 
 export default class ParkingLotHomeContainer extends Component {
@@ -14,9 +15,13 @@ export default class ParkingLotHomeContainer extends Component {
         this.updateParkingLotsInfo = this.updateParkingLotsInfo.bind(this);
         this.sortParkingLotsByPrice = this.sortParkingLotsByPrice.bind(this);
         this.sortParkingLotsByAvailable = this.sortParkingLotsByAvailable.bind(this);
+        this.onListItemClicked = this.onListItemClicked.bind(this);
+        this.setUser = this.setUser.bind(this);
 
         this.state = {
-            parkingLotsInfo: []
+            parkingLotsInfo: [],
+            selectedItem: null,
+            user: null
         }
     }
 
@@ -61,25 +66,39 @@ export default class ParkingLotHomeContainer extends Component {
         })
     }
 
+    onListItemClicked(item) {
+      this.setState({ selectedItem: item });
+    }
+
+    setUser(user) {
+      this.setState({ user });
+    }
+
     render() {
         return (
-            <>
-
-                <Row>
-
-                    <Col span={24}>
-                        <ParkingLotHomeHeaderContainer />
-                    </Col>
-
-                    <Col span={24}>
-                        <ParkingLotHomeBodyContainer
-                            sortParkingLotsByPrice={this.sortParkingLotsByPrice}
-                            sortParkingLotsByAvailable={this.sortParkingLotsByAvailable}
-                            parkingLotsInfo={this.state.parkingLotsInfo} />
-                    </Col>
-
-                </Row>
-            </>
-        )
+          <>
+            <Row>
+              <Col span={24}>
+                <ParkingLotHomeHeaderContainer setUser={this.setUser} />
+              </Col>
+            </Row>
+            <Row>
+              <Col span={10}>
+                <ParkingLotHomeBodyContainer
+                  sortParkingLotsByPrice={this.sortParkingLotsByPrice}
+                  sortParkingLotsByAvailable={this.sortParkingLotsByAvailable}
+                  parkingLotsInfo={this.state.parkingLotsInfo}
+                  onListItemClicked={this.onListItemClicked}
+                />
+              </Col>
+              <Col span={14}>
+                <ParkingLotHomeMainContentContainer
+                  selectedParkingLot={this.state.selectedItem}
+                  user={this.state.user}
+                />
+              </Col>
+            </Row>
+          </>
+        );
     }
 }

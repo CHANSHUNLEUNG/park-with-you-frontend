@@ -74,6 +74,7 @@ export default class ParkingLotHomeLogin extends Component {
     return (
       <div>
         <Modal
+          destroyOnClose={true}
           visible={this.props.LoginModalvisible ? true : false}
           title="Login"
           onOk={this.handleOk}

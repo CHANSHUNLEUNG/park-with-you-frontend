@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import logo from "../images/ParkWithYouLogo.png";
 import cat from "../images/CAT.JPG";
+import userIcon from "../images/userIcon.png";
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Row, Col, Layout, Button, Popconfirm, message } from "antd";
-import {
-  INIT_CUSTOMERS_INFO,
-  USER_NAME_INIT_STATE,
-} from "../Constants/Constant";
+import { USER_NAME_INIT_STATE } from "../Constants/Constant";
 import ParkingLotHomeLogin from "./ParkingLotHomeLogin";
 
 const { Header } = Layout;
@@ -28,7 +26,6 @@ export default class ParkingLotHomeHeader extends Component {
       isLoggedIn: false,
       LoginModalvisible: false,
       userId: 0,
-      customerList: INIT_CUSTOMERS_INFO,
       userName: USER_NAME_INIT_STATE,
     };
   }
@@ -89,15 +86,14 @@ export default class ParkingLotHomeHeader extends Component {
   }
 
   confirmLogin() {
-    
-      message.info("Signed in");
-      this.setState({
-        isLoggedIn: true,
-      });
-      this.closeLoginModal();
+    message.info("Signed in");
+    this.setState({
+      isLoggedIn: true,
+    });
+    this.closeLoginModal();
   }
 
-  failLogin(){
+  failLogin() {
     message.info("Not registered or Wrong password! ");
   }
   render() {
@@ -152,11 +148,15 @@ export default class ParkingLotHomeHeader extends Component {
                       confirmLogin={this.confirmLogin}
                       failLogin={this.failLogin}
                       showUserName={this.showUserName}
+                      setUser={this.props.setUser}
                     />
                   </div>
                 </Col>
                 <Col className="gutter-row" span={15}>
-                  <img src={cat} className="userIcon" />
+                  <img
+                    src={this.state.isLoggedIn ? cat : userIcon}
+                    className="userIcon"
+                  />
                 </Col>
               </Row>
             </div>
