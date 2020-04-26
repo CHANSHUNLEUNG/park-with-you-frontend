@@ -57,9 +57,10 @@ export default class ParkingLotHomeLogin extends Component {
       .post(BACK_END_USER_LOGIN_URL, passwordRequest)
       .then((response) => {
         if (response.status === 200) {
+          console.log(response);
           this.props.confirmLogin();
           this.props.showUserName(this.state.usernameInput);
-        }
+        } console.log(response);
       })
       .catch(() => {
         this.props.failLogin();
