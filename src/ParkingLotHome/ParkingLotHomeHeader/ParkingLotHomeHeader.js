@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "../images/ParkWithYouLogo.png";
 import cat from "../images/CAT.JPG";
+import userIcon from "../images/userIcon.png"
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Row, Col, Layout, Button, Popconfirm, message } from "antd";
@@ -147,7 +148,7 @@ export default class ParkingLotHomeHeader extends Component {
                   </div>
                 </Col>
                 <Col className="gutter-row" span={15}>
-                  <img src={cat} className="userIcon" />
+                  <img src={this.state.isLoggedIn?cat:userIcon} className="userIcon" />
                 </Col>
               </Row>
             </div>
