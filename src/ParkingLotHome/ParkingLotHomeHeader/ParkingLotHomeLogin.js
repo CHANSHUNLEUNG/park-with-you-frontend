@@ -33,9 +33,11 @@ export default class ParkingLotHomeLogin extends Component {
   };
 
   getUsernameInput(event) {
+    let userNameString = event.target.value.trim()
     this.setState({
-      usernameInput: event.target.value.trim(),
+      usernameInput: userNameString,
     });
+    this.props.showUserName(userNameString)
   }
 
   getPasswordInput(event) {

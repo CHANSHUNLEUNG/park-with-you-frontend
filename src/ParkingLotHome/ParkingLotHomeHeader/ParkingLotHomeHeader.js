@@ -20,15 +20,24 @@ export default class ParkingLotHomeHeader extends Component {
     this.closeLoginModal = this.closeLoginModal.bind(this);
     this.setUserId = this.setUserId.bind(this);
     this.confirmLogin = this.confirmLogin.bind(this);
+    this.showUserName = this.showUserName.bind(this);
 
     this.state = {
       isLoggedIn: false,
       LoginModalvisible: false,
       userId: 0,
       customerList: INIT_CUSTOMERS_INFO,
+      userName: 'User Name'
     };
   }
 
+  showUserName(userNameString){
+this.setState(
+  {
+  userName: userNameString
+  }
+)
+  }
   confirmAction() {
     if (this.state.isLoggedIn === true) {
       this.onLogout();
@@ -119,7 +128,7 @@ export default class ParkingLotHomeHeader extends Component {
                 <Col className="gutter-row" span={15}>
                   <div className="topright">
                     <Button shape="round" icon={<UserOutlined />} size="medium">
-                      User Name
+                      {this.state.userName}
                     </Button>
                     <br />
                     <br />
@@ -144,6 +153,7 @@ export default class ParkingLotHomeHeader extends Component {
                       customerList={this.state.customerList}
                       setUserId={this.setUserId}
                       confirmLogin={this.confirmLogin}
+                      showUserName = {this.showUserName}
                     />
                   </div>
                 </Col>
