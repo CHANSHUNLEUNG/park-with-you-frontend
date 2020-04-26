@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages{
-    stage('Build docker image') {
+    stage('Build') {
       steps{
         checkout scm
         sh 'docker build -t tatp-react-frontend --build-arg http_proxy=http://hklxdv47:20101 --build-arg https_proxy=http://hklxdv47:20101 .'
