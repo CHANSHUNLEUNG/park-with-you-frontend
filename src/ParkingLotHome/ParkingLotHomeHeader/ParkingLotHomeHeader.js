@@ -20,11 +20,13 @@ export default class ParkingLotHomeHeader extends Component {
     this.handleConfirm = this.handleConfirm.bind(this);
     this.showLoginModal = this.showLoginModal.bind(this);
     this.closeLoginModal = this.closeLoginModal.bind(this);
+    this.closeUserInfoModal = this.closeUserInfoModal.bind(this);
+    this.closeRegisterModal = this.closeRegisterModal.bind(this);
     this.confirmLogin = this.confirmLogin.bind(this);
     this.failLogin = this.failLogin.bind(this);
     this.showUserName = this.showUserName.bind(this);
     this.checkLoginStatus = this.checkLoginStatus.bind(this);
-    this.closeUserInfoModal = this.closeUserInfoModal.bind(this);
+    
 
     this.state = {
       isLoggedIn: false,
@@ -84,6 +86,12 @@ export default class ParkingLotHomeHeader extends Component {
   closeLoginModal() {
     this.setState({
       LoginModalvisible: false,
+    });
+  }
+
+  closeRegisterModal(){
+    this.setState({
+      registerModalVisible: false,
     });
   }
 
@@ -182,7 +190,8 @@ export default class ParkingLotHomeHeader extends Component {
                     closeUserInfoModal= {this.closeUserInfoModal}
                     />
                     <ParkingLotHomeRegister 
-                    registerModalVisible = {this.registerModalVisible}
+                    registerModalVisible = {this.state.registerModalVisible}
+                    closeRegisterModal = {this.closeRegisterModal}
                     />
                   </div>
                 </Col>
