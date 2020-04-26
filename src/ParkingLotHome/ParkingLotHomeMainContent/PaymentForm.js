@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, TimePicker, InputNumber, Button, Typography, Alert } from "antd";
+import { Card, TimePicker, InputNumber, Button, Typography, Alert, notification } from "antd";
+import { FrownOutlined } from "@ant-design/icons";
 import moment from "moment";
 import BookingApi from "../apis/BookingApi";
 
@@ -42,16 +43,24 @@ export default class PaymentForm extends Component {
       duration
     )
       .then((response) => {})
-      .catch((error) => {});
+      .catch((error) => {
+        const response = error.response.data
+        notification.open({
+          message: response.error,
+          description: response.message,
+          icon: <FrownOutlined style={{ color: "#ff6163" }} />,
+        });
+      });
   }
 
   isPaymentValid() {
+    return true
     return (
       this.props.parkingLot.available_count > 0 &&
       this.state.startingTime !== null
     );
   }
-  
+
   isLoggedIn() {
     return this.props.customer !== null;
   }
