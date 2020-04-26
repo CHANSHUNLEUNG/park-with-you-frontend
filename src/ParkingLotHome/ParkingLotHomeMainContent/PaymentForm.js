@@ -68,7 +68,7 @@ export default class PaymentForm extends Component {
             </p>
           </div>
           <div style={{ textAlign: "right" }}>
-            <p>Total Price: ${parkingLot.unitPrice * this.state.duration} </p>
+            <p>Total Price: ${parkingLot.unit_price * this.state.duration} </p>
           </div>
         </Card>
         <div style={{ textAlign: "right", marginTop: "24px" }}>

@@ -16,7 +16,7 @@ export default class ParkingLotHomeBodyList extends Component {
                     dataSource={this.props.parkingLotsInfo}
                     renderItem={item => (
                         <List.Item key={item.id}>
-                            <ParkingLotHomeBodyListItem item={item} />
+                            <ParkingLotHomeBodyListItem item={item} onClick={this.props.onListItemClicked} />
                         </List.Item>
                     )}
                 />

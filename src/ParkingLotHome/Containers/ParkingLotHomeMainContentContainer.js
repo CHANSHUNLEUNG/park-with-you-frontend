@@ -10,28 +10,20 @@ export default class RightPanel extends Component {
     super(props);
 
     this.state = {
-      customer: {
-        id: 1,
-        username: "User",
-      },
-      parkingLot: {
-        id: 1,
-        name: "Parking Lot1",
-        address: "Kowloon, Hong Kong",
-        unitPrice: 120,
-        capacity: 100,
-        availableCount: 50,
-        region: "Kowloon Tong",
-      },
     };
   }
 
   render() {
-    const { parkingLot, customer } = this.state;
+    const { user } = this.state;
+    const { selectedParkingLot } = this.props;
     return (
       <div style={{ padding: "24px" }}>
-        <ParkingLotDetails parkingLot={parkingLot} />
-        <PaymentForm parkingLot={parkingLot} customer={customer} />
+        {selectedParkingLot ? (
+          <div>
+            <ParkingLotDetails parkingLot={selectedParkingLot} />
+            <PaymentForm parkingLot={selectedParkingLot} customer={user} />
+          </div>
+        ) : null}
       </div>
     );
   }

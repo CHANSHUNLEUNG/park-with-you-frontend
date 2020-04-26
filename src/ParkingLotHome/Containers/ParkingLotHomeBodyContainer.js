@@ -24,7 +24,8 @@ export default class ParkingLotHomeBodyContainer extends Component {
                                 <ParkingLotHomeBodyList
                                     sortParkingLotsByPrice={this.props.sortParkingLotsByPrice}
                                     sortParkingLotsByAvailable={this.props.sortParkingLotsByAvailable}
-                                    parkingLotsInfo={this.props.parkingLotsInfo} />
+                                    parkingLotsInfo={this.props.parkingLotsInfo}
+                                    onListItemClicked={this.props.onListItemClicked} />
                             </Col>
                         </Row>
                     </Col>
