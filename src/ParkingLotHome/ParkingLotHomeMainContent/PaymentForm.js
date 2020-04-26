@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, TimePicker, InputNumber, Button, Typography } from "antd";
+import { Card, TimePicker, InputNumber, Button, Typography, Alert } from "antd";
 import moment from "moment";
 import BookingApi from "../apis/BookingApi";
 
@@ -52,13 +52,21 @@ export default class PaymentForm extends Component {
   }
 
   render() {
-    const { parkingLot } = this.props;
+    const { customer, parkingLot } = this.props;
     return (
       <div>
         <Typography.Title style={{ textAlign: "center" }}>
           Payment
         </Typography.Title>
         <Card>
+          {!customer ? (
+            <Alert
+              message="Warning"
+              description="Please login to make payment"
+              type="warning"
+              showIcon
+            />
+          ) : null}
           <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
             From:&nbsp;
             <TimePicker
@@ -81,7 +89,10 @@ export default class PaymentForm extends Component {
           </div>
         </Card>
         <div style={{ textAlign: "right", marginTop: "24px" }}>
-          <Button disabled={!this.isPaymentValid()} onClick={this.onSubmitPayment}>
+          <Button
+            disabled={!this.isPaymentValid()}
+            onClick={this.onSubmitPayment}
+          >
             Proceed to payment
           </Button>
         </div>

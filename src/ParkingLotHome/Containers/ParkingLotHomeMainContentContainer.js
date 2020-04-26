@@ -20,7 +20,7 @@ export default class ParkingLotHomeMainContentContainer extends Component {
         {selectedParkingLot ? (
           <div>
             <ParkingLotDetails parkingLot={selectedParkingLot} />
-            { user ? <PaymentForm parkingLot={selectedParkingLot} customer={user} /> : null }
+            <PaymentForm parkingLot={selectedParkingLot} customer={user} />
           </div>
         ) : null}
       </div>
