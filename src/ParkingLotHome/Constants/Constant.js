@@ -5,3 +5,13 @@ export const SORT_BY_NAME = "name";
 export const SORT_BY_DISTANCE = "distance";
 export const SORT_BY_AVAILABLE = "available";
 export const SORT_BY_PRICE = "price";
+
+export const INIT_CUSTOMERS_INFO = [
+    { id: 1 , name: "Matt", password: "Matt", bank_account:"123-456-789" },
+    { id: 2 , name: "Calvin", password: "calvin", bank_account:"123-456-987" },
+    { id: 3 , name: "Kelvin", password: "kelvin", bank_account:"123-456-654" },
+    { id: 4 , name: "Leo", password: "leo", bank_account:"123-456-123" },
+    { id: 5 , name: "Terrence", password: "terrence", bank_account:"654-456-789" },
+    { id: 6 , name: "Hilary", password: "hilary", bank_account:"987-456-123" },
+    { id: 7 , name: "Veronica", password: "veronica", bank_account:"321-456-987" },
+];

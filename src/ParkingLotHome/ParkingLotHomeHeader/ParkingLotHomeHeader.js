@@ -3,16 +3,9 @@ import logo from "../images/ParkWithYouLogo.png";
 import cat from "../images/CAT.JPG";
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
-import {
-  Row,
-  Col,
-  Layout,
-  Button,
-  Popconfirm,
-  message,
-  Modal,
-  Input,
-} from "antd";
+import { Row, Col, Layout, Button, Popconfirm, message } from "antd";
+import { INIT_CUSTOMERS_INFO } from "../Constants/Constant";
+import ParkingLotHomeLogin from "./ParkingLotHomeLogin";
 
 const { Header } = Layout;
 
@@ -22,12 +15,16 @@ export default class ParkingLotHomeHeader extends Component {
 
     this.confirmAction = this.confirmAction.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
-    this.showModal = this.showModal.bind(this);
+    this.showLoginModal = this.showLoginModal.bind(this);
+    this.closeLoginModal = this.closeLoginModal.bind(this);
+    this.setUserId = this.setUserId.bind(this);
+    this.confirmLogin = this.confirmLogin.bind(this);
 
     this.state = {
-      isLoggedIn: true,
-      loading: false,
-      visible: false,
+      isLoggedIn: false,
+      LoginModalvisible: false,
+      userId: 0,
+      customerList: INIT_CUSTOMERS_INFO,
     };
   }
 
@@ -41,11 +38,7 @@ export default class ParkingLotHomeHeader extends Component {
   }
 
   onLogin() {
-    this.showModal();
-    message.info("Signed in");
-    this.setState({
-      isLoggedIn: true,
-    });
+    this.showLoginModal();
   }
 
   onLogout() {
@@ -55,9 +48,15 @@ export default class ParkingLotHomeHeader extends Component {
     });
   }
 
-  showModal() {
+  showLoginModal() {
     this.setState({
-      visible: true,
+      LoginModalvisible: true,
+    });
+  }
+
+  closeLoginModal() {
+    this.setState({
+      LoginModalvisible: false,
     });
   }
 
@@ -72,16 +71,27 @@ export default class ParkingLotHomeHeader extends Component {
     return confirmMessage;
   }
 
-  handleOk = () => {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
-  };
+  setUserId(id) {
+    this.setState(
+      {
+        userId: id,
+      },
+      () => console.log(this.state.userId)
+    );
+  }
 
-  handleCancel = () => {
-    this.setState({ visible: false });
-  };
+  confirmLogin(isUser) {
+    if (isUser === true) {
+      message.info("Signed in");
+      this.setState({
+        isLoggedIn: true,
+      });
+      this.closeLoginModal();
+    }
+    if (isUser === false) {
+      message.info("Not registered or Wrong password! ");
+    }
+  }
 
   render() {
     return (
@@ -127,32 +137,13 @@ export default class ParkingLotHomeHeader extends Component {
                         {this.state.isLoggedIn ? "Sign out" : "Log in"}
                       </Button>
                     </Popconfirm>
-                    <Modal
-                      visible={this.state.visible}
-                      title="Login"
-                      onOk={this.handleOk}
-                      onCancel={this.handleCancel}
-                      footer={[
-                        <Button key="back" onClick={this.handleCancel}>
-                          Return
-                        </Button>,
-                        <Button
-                          key="submit"
-                          type="primary"
-                          loading={this.state.loading}
-                          onClick={this.handleOk}
-                        >
-                          Submit
-                        </Button>,
-                      ]}
-                    >
-                      <Input
-                        size="large"
-                        placeholder="Username"
-                        prefix={<UserOutlined />}
-                      />
-                      <Input.Password size="large" placeholder="Password" />
-                    </Modal>
+                    <ParkingLotHomeLogin
+                      LoginModalvisible={this.state.LoginModalvisible}
+                      closeLoginModal={this.closeLoginModal}
+                      customerList={this.state.customerList}
+                      setUserId={this.setUserId}
+                      confirmLogin={this.confirmLogin}
+                    />
                   </div>
                 </Col>
                 <Col className="gutter-row" span={15}>
