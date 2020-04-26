@@ -7,6 +7,8 @@ import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Row, Col, Layout, Button, Popconfirm, message } from "antd";
 import { USER_NAME_INIT_STATE } from "../Constants/Constant";
 import ParkingLotHomeLogin from "./ParkingLotHomeLogin";
+import ParkingLotHomeUserInfo from "./ParkingLotHomeUserInfo";
+import ParkingLotHomeRegister from "./ParkingLotHomeRegister";
 
 const { Header } = Layout;
 
@@ -21,10 +23,14 @@ export default class ParkingLotHomeHeader extends Component {
     this.confirmLogin = this.confirmLogin.bind(this);
     this.failLogin = this.failLogin.bind(this);
     this.showUserName = this.showUserName.bind(this);
+    this.checkLoginStatus = this.checkLoginStatus.bind(this);
+    this.closeUserInfoModal = this.closeUserInfoModal.bind(this);
 
     this.state = {
       isLoggedIn: false,
       LoginModalvisible: false,
+      registerModalVisible: false,
+      userInfoModalVisible: false,
       userId: 0,
       userName: USER_NAME_INIT_STATE,
     };
@@ -41,6 +47,7 @@ export default class ParkingLotHomeHeader extends Component {
       userName: USER_NAME_INIT_STATE,
     });
   }
+
   confirmAction() {
     if (this.state.isLoggedIn === true) {
       this.onLogout();
@@ -66,6 +73,12 @@ export default class ParkingLotHomeHeader extends Component {
     this.setState({
       LoginModalvisible: true,
     });
+  }
+
+  closeUserInfoModal() {
+    this.setState({
+      userInfoModalVisible:false,
+    })
   }
 
   closeLoginModal() {
@@ -96,6 +109,20 @@ export default class ParkingLotHomeHeader extends Component {
   failLogin() {
     message.info("Not registered or Wrong password! ");
   }
+
+  checkLoginStatus() {
+    if (this.state.isLoggedIn === true) {
+      this.setState({
+        userInfoModalVisible:true,
+      });
+    }
+    if (this.state.isLoggedIn === false) {
+      this.setState({
+        registerModalVisible:true,
+      });
+    }
+  }
+
   render() {
     return (
       <div>
@@ -120,7 +147,7 @@ export default class ParkingLotHomeHeader extends Component {
               <Row gutter={16}>
                 <Col className="gutter-row" span={15}>
                   <div className="topright">
-                    <Button shape="round" icon={<UserOutlined />} size="medium">
+                    <Button shape="round" icon={<UserOutlined />} size="medium" onClick={this.checkLoginStatus}>
                       {this.state.userName}
                     </Button>
                     <br />
@@ -149,6 +176,13 @@ export default class ParkingLotHomeHeader extends Component {
                       failLogin={this.failLogin}
                       showUserName={this.showUserName}
                       setUser={this.props.setUser}
+                    />
+                    <ParkingLotHomeUserInfo 
+                    userInfoModalVisible = {this.state.userInfoModalVisible}
+                    closeUserInfoModal= {this.closeUserInfoModal}
+                    />
+                    <ParkingLotHomeRegister 
+                    registerModalVisible = {this.registerModalVisible}
                     />
                   </div>
                 </Col>
