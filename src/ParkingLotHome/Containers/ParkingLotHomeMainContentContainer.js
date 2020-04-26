@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ParkingLotDetails from "./ParkingLotDetails";
-import PaymentForm from "./PaymentForm";
+import ParkingLotDetails from "../ParkingLotHomeMainContent/ParkingLotDetails";
+import PaymentForm from "../ParkingLotHomeMainContent/PaymentForm";
 
 export default class RightPanel extends Component {
   static propTypes = {};

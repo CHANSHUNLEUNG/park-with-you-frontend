@@ -1,3 +1,8 @@
+## Hilary: Package installed: Ant Design, Ant-Design/icons
+
+npm install --save @ant-design/icons
+npm i antd
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

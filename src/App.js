@@ -1,13 +1,11 @@
-import React from 'react';
-import './App.css';
-import 'antd/dist/antd.css';
-import RightPanel from './components/RightPanel';
+import React from "react";
+import ParkingLotHomeContainer from "./ParkingLotHome/Containers/ParkingLotHomeContainer";
 
 function App() {
   return (
-    <div className="App">
-      <RightPanel />
-    </div>
+    <>
+      <ParkingLotHomeContainer />
+    </>
   );
 }
 

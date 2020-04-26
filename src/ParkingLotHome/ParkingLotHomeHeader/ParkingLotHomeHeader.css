@@ -1,0 +1,44 @@
+.topright {
+    position: absolute;
+    top: 15px;
+    right: -440px;
+    font-size: 12px;
+    display: "inline-block";
+    line-height: 1.2;
+  }
+  .userIcon {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    position: absolute;
+    top: 8px;
+    right: -550px;
+    display: "inline-block";
+  }
+
+  .topleft {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    font-size: 20px;
+    display: "inline-block";
+    text-align: left;
+    line-height: 1.8;
+  }
+  .logo {
+    height: 100px;
+    width: 100px;
+  }
+
+  .homePageHeader {
+    color:rgb(239, 240, 241);
+    height:110px;
+    background-image: url("../images/Background.jpg");
+}
+
+.slogan {
+  line-height: 1.2;
+  display: "inline-block";
+  font-family: 'Franklin Gothic Medium';
+}
+
