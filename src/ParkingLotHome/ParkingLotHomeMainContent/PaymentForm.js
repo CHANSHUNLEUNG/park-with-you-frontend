@@ -19,6 +19,7 @@ export default class PaymentForm extends Component {
     this.onDurationChange = this.onDurationChange.bind(this);
     this.onSubmitPayment = this.onSubmitPayment.bind(this);
     this.isPaymentValid = this.isPaymentValid.bind(this);
+    this.isLoggedIn = this.isLoggedIn.bind(this);
     this.state = {
       duration: 1,
       startingTime: moment(),
@@ -50,16 +51,20 @@ export default class PaymentForm extends Component {
       this.state.startingTime !== null
     );
   }
+  
+  isLoggedIn() {
+    return this.props.customer !== null;
+  }
 
   render() {
-    const { customer, parkingLot } = this.props;
+    const { parkingLot } = this.props;
     return (
       <div>
         <Typography.Title style={{ textAlign: "center" }}>
           Payment
         </Typography.Title>
         <Card>
-          {!customer ? (
+          {!this.isLoggedIn() ? (
             <Alert
               message="Warning"
               description="Please login to make payment"
@@ -73,6 +78,7 @@ export default class PaymentForm extends Component {
               defaultValue={moment()}
               format={format}
               onChange={this.onTimePickerValueChange}
+              disabled={!this.isLoggedIn()}
             />
           </div>
           <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
@@ -81,6 +87,7 @@ export default class PaymentForm extends Component {
               min={1}
               defaultValue={1}
               onChange={this.onDurationChange}
+              disabled={!this.isLoggedIn()}
             />
             Hours
           </div>
@@ -90,7 +97,7 @@ export default class PaymentForm extends Component {
         </Card>
         <div style={{ textAlign: "right", marginTop: "24px" }}>
           <Button
-            disabled={!this.isPaymentValid()}
+            disabled={!this.isLoggedIn() && !this.isPaymentValid()}
             onClick={this.onSubmitPayment}
           >
             Proceed to payment
