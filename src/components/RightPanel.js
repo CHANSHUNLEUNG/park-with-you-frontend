@@ -4,14 +4,16 @@ import ParkingLotDetails from "./ParkingLotDetails";
 import PaymentForm from "./PaymentForm";
 
 export default class RightPanel extends Component {
-  static propTypes = {
-    prop: PropTypes,
-  };
+  static propTypes = {};
 
   constructor(props) {
     super(props);
 
     this.state = {
+      customer: {
+        id: 1,
+        username: "User",
+      },
       parkingLot: {
         id: 1,
         name: "Parking Lot1",
@@ -25,11 +27,11 @@ export default class RightPanel extends Component {
   }
 
   render() {
-    const { parkingLot } = this.state;
+    const { parkingLot, customer } = this.state;
     return (
-      <div>
+      <div style={{ padding: "24px" }}>
         <ParkingLotDetails parkingLot={parkingLot} />
-        <PaymentForm parkingLot={parkingLot} />
+        <PaymentForm parkingLot={parkingLot} customer={customer} />
       </div>
     );
   }

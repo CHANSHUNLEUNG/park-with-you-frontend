@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, TimePicker, InputNumber, Button, Typography } from "antd";
+import { Card, TimePicker, InputNumber, Button, Typography, Space } from "antd";
 import moment from "moment";
+import BookingApi from "../apis/BookingApi";
 
 const format = "HH:mm";
 
 export default class PaymentForm extends Component {
   static propTypes = {
     parkingLot: PropTypes.object,
+    customer: PropTypes.object,
   };
 
   constructor(props) {
@@ -15,6 +17,7 @@ export default class PaymentForm extends Component {
 
     this.onTimePickerValueChange = this.onTimePickerValueChange.bind(this);
     this.onDurationChange = this.onDurationChange.bind(this);
+    this.onSubmitPayment = this.onSubmitPayment.bind(this);
     this.state = {
       duration: 1,
       startingTime: "",
@@ -22,10 +25,17 @@ export default class PaymentForm extends Component {
   }
 
   onTimePickerValueChange(time, timeString) {
-    this.setState({ startingTime: timeString });
+    this.setState({ startingTime: time });
   }
   onDurationChange(value) {
     this.setState({ duration: value });
+  }
+  onSubmitPayment() {
+    const { startingTime, duration } = this.state;
+    const { parkingLot, customer } = this.props;
+    BookingApi.bookParkingLot(parkingLot.id, customer.id, startingTime, duration)
+      .then((response) => {})
+      .catch((error) => {});
   }
 
   render() {
@@ -37,26 +47,32 @@ export default class PaymentForm extends Component {
         </Typography.Title>
         <Card>
           <div>
-            From:
-            <TimePicker
-              defaultValue={moment()}
-              format={format}
-              onChange={this.onTimePickerValueChange}
-            />
+            <p>
+              From:
+              <TimePicker
+                defaultValue={moment()}
+                format={format}
+                onChange={this.onTimePickerValueChange}
+              />
+            </p>
           </div>
           <div>
-            Duration:{" "}
-            <InputNumber
-              min={1}
-              defaultValue={1}
-              onChange={this.onDurationChange}
-            />
-            Hours
+            <p>
+              Duration:{" "}
+              <InputNumber
+                min={1}
+                defaultValue={1}
+                onChange={this.onDurationChange}
+              />
+              Hours
+            </p>
           </div>
-          <div style={{ textAlign: "right" }}>Total Price: ${parkingLot.unitPrice * this.state.duration} </div>
+          <div style={{ textAlign: "right" }}>
+            <p>Total Price: ${parkingLot.unitPrice * this.state.duration} </p>
+          </div>
         </Card>
-        <div style={{ textAlign: "right" }}>
-          <Button>Proceed to payment</Button>
+        <div style={{ textAlign: "right", marginTop: "24px" }}>
+          <Button onClick={this.onSubmitPayment}>Proceed to payment</Button>
         </div>
       </div>
     );
