@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined } from "@ant-design/icons";
-import sha256 from 'sha256';
-import { Button, Modal, Input,message } from "antd";
-import axios from 'axios';
-import {BACKEND_HOST_URL} from '../Constants/Constant';
-
+import sha256 from "sha256";
+import { Button, Modal, Input, message } from "antd";
+import axios from "axios";
+import { BACKEND_HOST_URL } from "../Constants/Constant";
 
 export default class ParkingLotHomeLogin extends Component {
   constructor(props) {
@@ -43,31 +42,28 @@ export default class ParkingLotHomeLogin extends Component {
 
   getPasswordInput(event) {
     let passwordInputHash = sha256(event.target.value.trim());
-    console.log(event.target.value.trim());
     this.setState({
       passwordInput: event.target.value.trim(),
     });
   }
 
   checkIsUser() {
-    const BACK_END_USER_LOGIN_URL = BACKEND_HOST_URL +"/customers/" +this.state.usernameInput +"/"+ "login";
+    const BACK_END_USER_LOGIN_URL =
+      BACKEND_HOST_URL + "/customers/" + this.state.usernameInput + "/login";
     const passwordRequest = {
-        password: this.state.passwordInput,
-    }
-    axios.post(BACK_END_USER_LOGIN_URL, passwordRequest).then(response => {
-      console.log(response.status);
-      if(response.status === 200){
-        
-        this.props.confirmLogin();
-        this.props.showUserName(this.state.usernameInput);
-      }
-      if(response.status!== 200){
-        console.log("hi");
+      password: this.state.passwordInput,
+    };
+    axios
+      .post(BACK_END_USER_LOGIN_URL, passwordRequest)
+      .then((response) => {
+        if (response.status === 200) {
+          this.props.confirmLogin();
+          this.props.showUserName(this.state.usernameInput);
+        }
+      })
+      .catch((error) => {
         this.props.failLogin();
-      }
-    
-  });
-
+      });
   }
 
   render() {
