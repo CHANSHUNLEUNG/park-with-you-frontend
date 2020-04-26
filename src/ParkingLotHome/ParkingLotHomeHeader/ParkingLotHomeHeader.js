@@ -104,7 +104,7 @@ export default class ParkingLotHomeHeader extends Component {
             <div className="topleft">
               <Row gutter={16}>
                 <Col className="gutter-row" span={8}>
-                  <img src={logo} className="logo"></img>
+                  <img src={logo} alt="" className="logo"></img>
                 </Col>
                 <Col className="gutter-row" span={15}>
                   <div className="slogan">
@@ -143,12 +143,9 @@ export default class ParkingLotHomeHeader extends Component {
                     <ParkingLotHomeLogin
                       LoginModalvisible={this.state.LoginModalvisible}
                       closeLoginModal={this.closeLoginModal}
-                      customerList={this.state.customerList}
-                      //setUserId={this.setUserId}
                       confirmLogin={this.confirmLogin}
                       failLogin={this.failLogin}
                       showUserName={this.showUserName}
-                      setUser={this.props.setUser}
                     />
                   </div>
                 </Col>
@@ -156,6 +153,7 @@ export default class ParkingLotHomeHeader extends Component {
                   <img
                     src={this.state.isLoggedIn ? cat : userIcon}
                     className="userIcon"
+                    alt=""
                   />
                 </Col>
               </Row>

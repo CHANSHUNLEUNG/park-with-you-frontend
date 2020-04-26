@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import ParkingLotDetails from "../ParkingLotHomeMainContent/ParkingLotDetails";
 import PaymentForm from "../ParkingLotHomeMainContent/PaymentForm";
 
