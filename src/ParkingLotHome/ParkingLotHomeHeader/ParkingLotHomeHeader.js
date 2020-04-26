@@ -20,8 +20,8 @@ export default class ParkingLotHomeHeader extends Component {
     this.handleConfirm = this.handleConfirm.bind(this);
     this.showLoginModal = this.showLoginModal.bind(this);
     this.closeLoginModal = this.closeLoginModal.bind(this);
-    this.setUserId = this.setUserId.bind(this);
     this.confirmLogin = this.confirmLogin.bind(this);
+    this.failLogin = this.failLogin.bind(this);
     this.showUserName = this.showUserName.bind(this);
 
     this.state = {
@@ -88,28 +88,18 @@ export default class ParkingLotHomeHeader extends Component {
     return confirmMessage;
   }
 
-  setUserId(id) {
-    this.setState(
-      {
-        userId: id,
-      },
-      () => console.log(this.state.userId)
-    );
-  }
-
-  confirmLogin(isUser) {
-    if (isUser === true) {
+  confirmLogin() {
+    
       message.info("Signed in");
       this.setState({
         isLoggedIn: true,
       });
       this.closeLoginModal();
-    }
-    if (isUser === false) {
-      message.info("Not registered or Wrong password! ");
-    }
   }
 
+  failLogin(){
+    message.info("Not registered or Wrong password! ");
+  }
   render() {
     return (
       <div>
@@ -158,8 +148,9 @@ export default class ParkingLotHomeHeader extends Component {
                       LoginModalvisible={this.state.LoginModalvisible}
                       closeLoginModal={this.closeLoginModal}
                       customerList={this.state.customerList}
-                      setUserId={this.setUserId}
+                      //setUserId={this.setUserId}
                       confirmLogin={this.confirmLogin}
+                      failLogin={this.failLogin}
                       showUserName={this.showUserName}
                     />
                   </div>

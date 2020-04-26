@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined } from "@ant-design/icons";
-import { Button, Modal, Input } from "antd";
+import sha256 from 'sha256';
+import { Button, Modal, Input,message } from "antd";
+import axios from 'axios';
+import {BACKEND_HOST_URL} from '../Constants/Constant';
 
-const FIRST_ELEMENT = 0;
 
 export default class ParkingLotHomeLogin extends Component {
   constructor(props) {
@@ -25,7 +27,7 @@ export default class ParkingLotHomeLogin extends Component {
     setTimeout(() => {
       this.setState({ loading: false });
     }, 3000);
-    this.props.confirmLogin(this.checkIsUser());
+    this.checkIsUser();
   };
 
   handleCancel = () => {
@@ -40,27 +42,32 @@ export default class ParkingLotHomeLogin extends Component {
   }
 
   getPasswordInput(event) {
+    let passwordInputHash = sha256(event.target.value.trim());
+    console.log(event.target.value.trim());
     this.setState({
       passwordInput: event.target.value.trim(),
     });
   }
 
   checkIsUser() {
-    const customers = this.props.customerList;
-    const userNameString = this.state.usernameInput;
-    var isUser = false;
-    var matchedUsername = customers.filter(
-      (customer) => customer.name === this.state.usernameInput
-    );
-    var matchedUser = matchedUsername.filter(
-      (customer) => customer.password === this.state.passwordInput
-    );
-    if (matchedUser.length > 0) {
-      isUser = true;
-      this.props.setUserId(matchedUser[FIRST_ELEMENT].id);
-      this.props.showUserName(userNameString);
+    const BACK_END_USER_LOGIN_URL = BACKEND_HOST_URL +"/customers/" +this.state.usernameInput +"/"+ "login";
+    const passwordRequest = {
+        password: this.state.passwordInput,
     }
-    return isUser;
+    axios.post(BACK_END_USER_LOGIN_URL, passwordRequest).then(response => {
+      console.log(response.status);
+      if(response.status === 200){
+        
+        this.props.confirmLogin();
+        this.props.showUserName(this.state.usernameInput);
+      }
+      if(response.status!== 200){
+        console.log("hi");
+        this.props.failLogin();
+      }
+    
+  });
+
   }
 
   render() {
