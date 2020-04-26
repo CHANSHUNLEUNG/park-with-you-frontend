@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Row, Col } from 'antd';
 import ParkingLotHomeBodyContainer from './ParkingLotHomeBodyContainer'
 import ParkingLotHomeHeaderContainer from './ParkingLotHomeHeaderContainer'
+import ParkingLotHomeMainContentContainer from './ParkingLotHomeMainContentContainer'
 import { BACKEND_HOST_URL, PARKING_LOT_INFO_PATH, TEST_PARKING_LOT_LIST } from '../Constants/Constant';
 
 
@@ -70,12 +71,16 @@ export default class ParkingLotHomeContainer extends Component {
                     <Col span={24}>
                         <ParkingLotHomeHeaderContainer />
                     </Col>
-
-                    <Col span={24}>
+                </Row>
+                <Row>
+                    <Col span={10}>
                         <ParkingLotHomeBodyContainer
                             sortParkingLotsByPrice={this.sortParkingLotsByPrice}
                             sortParkingLotsByAvailable={this.sortParkingLotsByAvailable}
                             parkingLotsInfo={this.state.parkingLotsInfo} />
+                    </Col>
+                    <Col span={14}>
+                    <ParkingLotHomeMainContentContainer/>
                     </Col>
 
                 </Row>

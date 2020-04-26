@@ -1,5 +1,5 @@
-import React from 'react';
-import ParkingLotHomeContainer from './ParkingLotHome/Containers/ParkingLotHomeContainer';
+import React from "react";
+import ParkingLotHomeContainer from "./ParkingLotHome/Containers/ParkingLotHomeContainer";
 
 function App() {
   return (
