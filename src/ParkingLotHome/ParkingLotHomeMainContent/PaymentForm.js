@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, TimePicker, InputNumber, Button, Typography, Space } from "antd";
+import { Card, TimePicker, InputNumber, Button, Typography } from "antd";
 import moment from "moment";
 import BookingApi from "../apis/BookingApi";
 
@@ -33,7 +33,12 @@ export default class PaymentForm extends Component {
   onSubmitPayment() {
     const { startingTime, duration } = this.state;
     const { parkingLot, customer } = this.props;
-    BookingApi.bookParkingLot(parkingLot.id, customer.id, startingTime, duration)
+    BookingApi.bookParkingLot(
+      parkingLot.id,
+      customer.id,
+      startingTime,
+      duration
+    )
       .then((response) => {})
       .catch((error) => {});
   }
@@ -46,26 +51,22 @@ export default class PaymentForm extends Component {
           Payment
         </Typography.Title>
         <Card>
-          <div>
-            <p>
-              From:
-              <TimePicker
-                defaultValue={moment()}
-                format={format}
-                onChange={this.onTimePickerValueChange}
-              />
-            </p>
+          <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
+            From:&nbsp;
+            <TimePicker
+              defaultValue={moment()}
+              format={format}
+              onChange={this.onTimePickerValueChange}
+            />
           </div>
-          <div>
-            <p>
-              Duration:{" "}
-              <InputNumber
-                min={1}
-                defaultValue={1}
-                onChange={this.onDurationChange}
-              />
-              Hours
-            </p>
+          <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
+            Duration:&nbsp;
+            <InputNumber
+              min={1}
+              defaultValue={1}
+              onChange={this.onDurationChange}
+            />
+            Hours
           </div>
           <div style={{ textAlign: "right" }}>
             <p>Total Price: ${parkingLot.unit_price * this.state.duration} </p>
