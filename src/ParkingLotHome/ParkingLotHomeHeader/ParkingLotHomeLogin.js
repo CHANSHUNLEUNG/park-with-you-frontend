@@ -58,6 +58,7 @@ export default class ParkingLotHomeLogin extends Component {
     if (matchedUser.length > 0) {
       isUser = true;
       this.props.setUserId(matchedUser[FIRST_ELEMENT].id);
+      this.props.setUser(matchedUser[FIRST_ELEMENT]);
       this.props.showUserName(userNameString);
     }
     return isUser;

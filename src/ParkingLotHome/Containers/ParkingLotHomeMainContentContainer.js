@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ParkingLotDetails from "../ParkingLotHomeMainContent/ParkingLotDetails";
 import PaymentForm from "../ParkingLotHomeMainContent/PaymentForm";
 
-export default class RightPanel extends Component {
+export default class ParkingLotHomeMainContentContainer extends Component {
   static propTypes = {};
 
   constructor(props) {
@@ -14,14 +14,13 @@ export default class RightPanel extends Component {
   }
 
   render() {
-    const { user } = this.state;
-    const { selectedParkingLot } = this.props;
+    const { selectedParkingLot, user } = this.props;
     return (
       <div style={{ padding: "24px" }}>
         {selectedParkingLot ? (
           <div>
             <ParkingLotDetails parkingLot={selectedParkingLot} />
-            <PaymentForm parkingLot={selectedParkingLot} customer={user} />
+            { user ? <PaymentForm parkingLot={selectedParkingLot} customer={user} /> : null }
           </div>
         ) : null}
       </div>

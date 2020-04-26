@@ -18,9 +18,10 @@ export default class PaymentForm extends Component {
     this.onTimePickerValueChange = this.onTimePickerValueChange.bind(this);
     this.onDurationChange = this.onDurationChange.bind(this);
     this.onSubmitPayment = this.onSubmitPayment.bind(this);
+    this.isPaymentValid = this.isPaymentValid.bind(this);
     this.state = {
       duration: 1,
-      startingTime: "",
+      startingTime: moment(),
     };
   }
 
@@ -41,6 +42,13 @@ export default class PaymentForm extends Component {
     )
       .then((response) => {})
       .catch((error) => {});
+  }
+
+  isPaymentValid() {
+    return (
+      this.props.parkingLot.available_count > 0 &&
+      this.state.startingTime !== null
+    );
   }
 
   render() {
@@ -73,7 +81,9 @@ export default class PaymentForm extends Component {
           </div>
         </Card>
         <div style={{ textAlign: "right", marginTop: "24px" }}>
-          <Button onClick={this.onSubmitPayment}>Proceed to payment</Button>
+          <Button disabled={!this.isPaymentValid()} onClick={this.onSubmitPayment}>
+            Proceed to payment
+          </Button>
         </div>
       </div>
     );

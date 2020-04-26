@@ -97,6 +97,10 @@ export default class ParkingLotHomeHeader extends Component {
       () => console.log(this.state.userId)
     );
   }
+  
+  setUser(user) {
+    this.props.setUser(user)
+  }
 
   confirmLogin(isUser) {
     if (isUser === true) {
@@ -162,6 +166,7 @@ export default class ParkingLotHomeHeader extends Component {
                       setUserId={this.setUserId}
                       confirmLogin={this.confirmLogin}
                       showUserName={this.showUserName}
+                      setUser={this.props.setUser}
                     />
                   </div>
                 </Col>

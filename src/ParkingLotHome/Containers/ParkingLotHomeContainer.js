@@ -16,10 +16,12 @@ export default class ParkingLotHomeContainer extends Component {
         this.sortParkingLotsByPrice = this.sortParkingLotsByPrice.bind(this);
         this.sortParkingLotsByAvailable = this.sortParkingLotsByAvailable.bind(this);
         this.onListItemClicked = this.onListItemClicked.bind(this);
+        this.setUser = this.setUser.bind(this);
 
         this.state = {
             parkingLotsInfo: [],
-            selectedItem: null
+            selectedItem: null,
+            user: null
         }
     }
 
@@ -68,12 +70,16 @@ export default class ParkingLotHomeContainer extends Component {
       this.setState({ selectedItem: item });
     }
 
+    setUser(user) {
+      this.setState({ user });
+    }
+
     render() {
         return (
           <>
             <Row>
               <Col span={24}>
-                <ParkingLotHomeHeaderContainer />
+                <ParkingLotHomeHeaderContainer setUser={this.setUser} />
               </Col>
             </Row>
             <Row>
@@ -88,7 +94,7 @@ export default class ParkingLotHomeContainer extends Component {
               <Col span={14}>
                 <ParkingLotHomeMainContentContainer
                   selectedParkingLot={this.state.selectedItem}
-                  user={INIT_CUSTOMERS_INFO[0]}
+                  user={this.state.user}
                 />
               </Col>
             </Row>
