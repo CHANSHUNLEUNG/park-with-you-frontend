@@ -4,7 +4,10 @@ import cat from "../images/CAT.JPG";
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Row, Col, Layout, Button, Popconfirm, message } from "antd";
-import { INIT_CUSTOMERS_INFO } from "../Constants/Constant";
+import {
+  INIT_CUSTOMERS_INFO,
+  USER_NAME_INIT_STATE,
+} from "../Constants/Constant";
 import ParkingLotHomeLogin from "./ParkingLotHomeLogin";
 
 const { Header } = Layout;
@@ -26,16 +29,20 @@ export default class ParkingLotHomeHeader extends Component {
       LoginModalvisible: false,
       userId: 0,
       customerList: INIT_CUSTOMERS_INFO,
-      userName: 'User Name'
+      userName: USER_NAME_INIT_STATE,
     };
   }
 
-  showUserName(userNameString){
-this.setState(
-  {
-  userName: userNameString
+  showUserName(userNameString) {
+    this.setState({
+      userName: userNameString,
+    });
   }
-)
+
+  clearUserName() {
+    this.setState({
+      userName: USER_NAME_INIT_STATE,
+    });
   }
   confirmAction() {
     if (this.state.isLoggedIn === true) {
@@ -55,6 +62,7 @@ this.setState(
     this.setState({
       isLoggedIn: false,
     });
+    this.clearUserName();
   }
 
   showLoginModal() {
@@ -152,7 +160,7 @@ this.setState(
                       customerList={this.state.customerList}
                       setUserId={this.setUserId}
                       confirmLogin={this.confirmLogin}
-                      showUserName = {this.showUserName}
+                      showUserName={this.showUserName}
                     />
                   </div>
                 </Col>

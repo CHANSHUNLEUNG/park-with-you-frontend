@@ -33,11 +33,10 @@ export default class ParkingLotHomeLogin extends Component {
   };
 
   getUsernameInput(event) {
-    let userNameString = event.target.value.trim()
+    let userNameString = event.target.value.trim();
     this.setState({
       usernameInput: userNameString,
     });
-    this.props.showUserName(userNameString)
   }
 
   getPasswordInput(event) {
@@ -48,6 +47,7 @@ export default class ParkingLotHomeLogin extends Component {
 
   checkIsUser() {
     const customers = this.props.customerList;
+    const userNameString = this.state.usernameInput;
     var isUser = false;
     var matchedUsername = customers.filter(
       (customer) => customer.name === this.state.usernameInput
@@ -58,6 +58,7 @@ export default class ParkingLotHomeLogin extends Component {
     if (matchedUser.length > 0) {
       isUser = true;
       this.props.setUserId(matchedUser[FIRST_ELEMENT].id);
+      this.props.showUserName(userNameString);
     }
     return isUser;
   }

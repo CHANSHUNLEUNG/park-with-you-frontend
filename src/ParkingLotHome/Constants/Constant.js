@@ -5,6 +5,7 @@ export const SORT_BY_NAME = "name";
 export const SORT_BY_DISTANCE = "distance";
 export const SORT_BY_AVAILABLE = "available";
 export const SORT_BY_PRICE = "price";
+export const USER_NAME_INIT_STATE = "User Name";
 
 export const INIT_CUSTOMERS_INFO = [
     { id: 1 , name: "Matt", password: "Matt", bank_account:"123-456-789" },
