@@ -27,12 +27,12 @@ export default class ParkingLotHomeContainer extends Component {
 
   componentDidMount() {
     // static test
-    // this.setState({
-    //   parkingLotsInfo: TEST_PARKING_LOT_LIST
-    // },() => this.sortParkingLotsByPrice());
+    this.setState({
+      parkingLotsInfo: TEST_PARKING_LOT_LIST
+    },() => this.sortParkingLotsByPrice());
 
     // production
-    this.updateParkingLotsInfo();
+    // this.updateParkingLotsInfo();
   }
 
   sortParkingLotsByPrice() {

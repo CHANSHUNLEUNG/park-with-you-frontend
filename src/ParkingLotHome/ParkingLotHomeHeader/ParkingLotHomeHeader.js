@@ -9,6 +9,7 @@ import { USER_NAME_INIT_STATE } from "../Constants/Constant";
 import ParkingLotHomeLogin from "./ParkingLotHomeLogin";
 import ParkingLotHomeUserInfo from "./ParkingLotHomeUserInfo";
 import ParkingLotHomeRegister from "./ParkingLotHomeRegister";
+import ParkingLotHomeOrderDropdown from "./ParkingLotHomeOrderDropdown";
 
 const { Header } = Layout;
 
@@ -27,7 +28,7 @@ export default class ParkingLotHomeHeader extends Component {
     this.showUserName = this.showUserName.bind(this);
     this.checkLoginStatus = this.checkLoginStatus.bind(this);
     this.setUser = this.setUser.bind(this);
-    
+
 
     this.state = {
       isLoggedIn: false,
@@ -81,7 +82,7 @@ export default class ParkingLotHomeHeader extends Component {
 
   closeUserInfoModal() {
     this.setState({
-      userInfoModalVisible:false,
+      userInfoModalVisible: false,
     })
   }
 
@@ -91,7 +92,7 @@ export default class ParkingLotHomeHeader extends Component {
     });
   }
 
-  closeRegisterModal(){
+  closeRegisterModal() {
     this.setState({
       registerModalVisible: false,
     });
@@ -123,12 +124,12 @@ export default class ParkingLotHomeHeader extends Component {
   checkLoginStatus() {
     if (this.state.isLoggedIn === true) {
       this.setState({
-        userInfoModalVisible:true,
+        userInfoModalVisible: true,
       });
     }
     if (this.state.isLoggedIn === false) {
       this.setState({
-        registerModalVisible:true,
+        registerModalVisible: true,
       });
     }
   }
@@ -189,14 +190,17 @@ export default class ParkingLotHomeHeader extends Component {
                       showUserName={this.showUserName}
                       setUser={this.setUser}
                     />
-                    <ParkingLotHomeUserInfo 
-                    userInfoModalVisible = {this.state.userInfoModalVisible}
-                    closeUserInfoModal= {this.closeUserInfoModal}
+                    <ParkingLotHomeUserInfo
+                      userInfoModalVisible={this.state.userInfoModalVisible}
+                      closeUserInfoModal={this.closeUserInfoModal}
                     />
-                    <ParkingLotHomeRegister 
-                    registerModalVisible = {this.state.registerModalVisible}
-                    closeRegisterModal = {this.closeRegisterModal}
+                    <ParkingLotHomeRegister
+                      registerModalVisible={this.state.registerModalVisible}
+                      closeRegisterModal={this.closeRegisterModal}
                     />
+                    <div className="order-dropdown">
+                      <ParkingLotHomeOrderDropdown />
+                    </div>
                   </div>
                 </Col>
                 <Col className="gutter-row" span={15}>
