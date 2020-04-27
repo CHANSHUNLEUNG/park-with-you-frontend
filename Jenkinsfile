@@ -20,6 +20,9 @@ pipeline {
       }
     }
     stage('Deploy to production'){
+      environment{
+        REACT_APP_API_HOST = 'http://hk3cvdv00648.oocl.com/9400'
+      }
       steps{
         input "Deploy to prod?"
         sh 'docker container ls -a -fname=${DOCKER_NAME}-production -q | xargs -r docker container rm --force'
