@@ -28,6 +28,9 @@ export default class ParkingLotHomeHeader extends Component {
     this.showUserName = this.showUserName.bind(this);
     this.checkLoginStatus = this.checkLoginStatus.bind(this);
     this.setUser = this.setUser.bind(this);
+    this.registerFailedAsUserExists = this.registerFailedAsUserExists.bind(this);
+    this.registerFailedAsInappropriateInput = this.registerFailedAsInappropriateInput.bind(this);
+    this.registerSuccess = this.registerSuccess.bind(this);
 
 
     this.state = {
@@ -121,6 +124,19 @@ export default class ParkingLotHomeHeader extends Component {
     message.info("Not registered or Wrong password! ");
   }
 
+  registerSuccess(newUser){
+    message.info("Create user "+ newUser +" successfuly");
+    this.closeRegisterModal();
+  }
+
+  registerFailedAsUserExists(){
+    message.info("Fail to create user, user name already exists");
+  }
+
+  registerFailedAsInappropriateInput(){
+    message.info("Fail to create user, user name or password or bank account cannot be blank");
+  }
+  
   checkLoginStatus() {
     if (this.state.isLoggedIn === true) {
       this.setState({
@@ -197,6 +213,9 @@ export default class ParkingLotHomeHeader extends Component {
                     <ParkingLotHomeRegister
                       registerModalVisible={this.state.registerModalVisible}
                       closeRegisterModal={this.closeRegisterModal}
+                      registerFailedAsInappropriateInput = {this.registerFailedAsInappropriateInput}
+                      registerFailedAsUserExists = {this.registerFailedAsUserExists}
+                      registerSuccess = {this.registerSuccess}
                     />
                     <div className="order-dropdown">
                       <ParkingLotHomeOrderDropdown />
