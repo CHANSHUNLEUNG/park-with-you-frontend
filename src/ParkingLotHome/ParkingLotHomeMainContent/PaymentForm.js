@@ -105,7 +105,7 @@ export default class PaymentForm extends Component {
         </Card>
         <div style={{ textAlign: "right", marginTop: "24px" }}>
           <Button
-            disabled={!this.isLoggedIn() && !this.isPaymentValid()}
+            disabled={!this.isLoggedIn() || !this.isPaymentValid()}
             onClick={this.onSubmitPayment}
           >
             Proceed to payment
