@@ -1,5 +1,7 @@
 # Stage 1 - production build
 FROM node as build-deps
+ARG REACT_APP_API_HOST
+ENV REACT_APP_API_HOST=$REACT_APP_API_HOST
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
