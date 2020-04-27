@@ -20,7 +20,8 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
       remainingMinute: 0,
       remainingSecond: 0,
       duration: 1,
-      order: this.props.order
+      order: this.props.order,
+      isLoading: false
     };
   }
 
@@ -58,9 +59,11 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
 
 
   onExtendButtonClick() {
+    this.setState({ isLoading: true });
     BookingApi.extendBooking(this.state.order.orderId, this.state.duration)
       .then(response => {
         this.setState((prevSate) => ({
+          isLoading: false,
           order: {
             ...prevSate.order,
             duration: response.data.duration,
@@ -68,11 +71,13 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
         }));
 
       })
-      .catch();
+      .catch(error => {
+        this.setState({ isLoading: false });
+      });
   }
 
   render() {
-    const { order, remainingMinute, remainingSecond, remainingTimeType } = this.state;
+    const { order, remainingMinute, remainingSecond, remainingTimeType, isLoading } = this.state;
     return (
       <div>
         <Row>
@@ -97,11 +102,26 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
             </div>
           </Col>
           <Col span={12}>
-            <div>
-              Extend:&nbsp;
+            {isLoading ? (
+              <svg
+                viewBox="0 0 1024 1024"
+                focusable="false"
+                class="anticon-spin"
+                data-icon="loading"
+                width="1em"
+                height="1em"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path>
+              </svg>
+            ) : (
+              <div>
+                Extend:&nbsp;
               <InputNumber min={1} defaultValue={1} onChange={this.onDurationChange}/>
               <Button shape="circle" icon={<PlusOutlined />} size="small" onClick={this.onExtendButtonClick}/>
-            </div>
+              </div>
+            )}
           </Col>
         </Row>
       </div>
