@@ -1,9 +1,9 @@
 pipeline {
   agent any
   environment{
-    DOCKER_IMAGE = "tatp-react-frontend"
-    DOCKER_NAME = "react"
-    DOCKER_NETWORK_BASE = "tatp"
+    DOCKER_IMAGE = 'tatp-react-frontend'
+    DOCKER_NAME = 'react'
+    DOCKER_NETWORK_BASE = 'tatp'
   }
   stages{
     stage('Build') {
