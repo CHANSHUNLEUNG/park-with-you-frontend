@@ -20,7 +20,7 @@ export default class ParkingLotHomeBodyContainer extends Component {
 
                     <Col span={24}>
                         <Row gutter={[16, 50]} justify="center">
-                            <Col span={10}>
+                            <Col span={20}>
                                 <ParkingLotHomeBodyList
                                     sortParkingLotsByPrice={this.props.sortParkingLotsByPrice}
                                     sortParkingLotsByAvailable={this.props.sortParkingLotsByAvailable}
