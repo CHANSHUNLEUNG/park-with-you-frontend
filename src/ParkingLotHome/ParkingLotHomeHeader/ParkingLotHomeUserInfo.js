@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./ParkingLotHomeHeader.css";
-import { UserOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 
 export default class ParkingLotHomeUserInfo extends Component {
@@ -32,9 +31,9 @@ export default class ParkingLotHomeUserInfo extends Component {
             </Button>,
           ]}
         >
-          user ID : <br />
-          Name : <br />
-          Bank Account : <br />
+          user ID : {this.props.user.id}<br />
+          Name : {this.props.user.name}<br />
+          Bank Account : {this.props.user.bankAccount}<br />
         </Modal>
       </div>
     );

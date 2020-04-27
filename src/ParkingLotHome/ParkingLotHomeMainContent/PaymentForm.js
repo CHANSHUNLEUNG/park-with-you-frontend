@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, TimePicker, InputNumber, Button, Typography, Alert, notification } from "antd";
-import { FrownOutlined } from "@ant-design/icons";
+import {
+  Card,
+  TimePicker,
+  InputNumber,
+  Button,
+  Typography,
+  Alert,
+  notification,
+} from "antd";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import moment from "moment";
 import BookingApi from "../apis/BookingApi";
+import ShareLinkModal from "./ShareLinkModal";
 
 const format = "HH:mm";
 
@@ -21,10 +30,13 @@ export default class PaymentForm extends Component {
     this.onSubmitPayment = this.onSubmitPayment.bind(this);
     this.isPaymentValid = this.isPaymentValid.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
+    this.showShareLinkModal = this.showShareLinkModal.bind(this);
+
     this.state = {
       duration: 1,
       startingTime: moment(),
-      paymentSuccess:true,
+      paymentSuccess: true,
+      shareLinkModalVisible: false,
     };
   }
 
@@ -45,11 +57,18 @@ export default class PaymentForm extends Component {
     )
       .then((response) => {
         this.setState({
-          paymentSuccess:true,
-        })
+          paymentSuccess: true,
+        });
+        notification.open({
+          message: "Order Parking Lot Success",
+          description: `${
+            parkingLot.name
+          } with start time ${startingTime.format("HH:mm")}`,
+          icon: <SmileOutlined style={{ color: "#52c41a" }} />,
+        });
       })
       .catch((error) => {
-        const response = error.response.data
+        const response = error.response.data;
         notification.open({
           message: response.error,
           description: response.message,
@@ -67,6 +86,14 @@ export default class PaymentForm extends Component {
 
   isLoggedIn() {
     return this.props.customer !== null;
+  }
+
+  showShareLinkModal() {
+    this.setState((prevState) => {
+      return {
+        shareLinkModalVisible: !prevState.shareLinkModalVisible,
+      };
+    });
   }
 
   render() {
@@ -114,8 +141,20 @@ export default class PaymentForm extends Component {
             onClick={this.onSubmitPayment}
           >
             Proceed to payment
-          </Button><br /><br/>
-          <Button type="link" disabled={!this.state.paymentSuccess}>Share Link To Get Coupon</Button>
+          </Button>
+          <br />
+          <br />
+          <Button
+            type="link"
+            disabled={!this.state.paymentSuccess}
+            onClick={this.showShareLinkModal}
+          >
+            Share Link To Get Coupon
+          </Button>{" "}
+          <ShareLinkModal
+            shareLinkModalVisible={this.state.shareLinkModalVisible}
+            showShareLinkModal={this.showShareLinkModal}
+          />
         </div>
       </div>
     );
