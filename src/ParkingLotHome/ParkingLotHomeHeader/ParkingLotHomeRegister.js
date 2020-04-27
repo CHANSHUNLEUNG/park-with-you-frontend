@@ -3,31 +3,30 @@ import "./ParkingLotHomeHeader.css";
 import { UserOutlined } from "@ant-design/icons";
 import { Button, Modal, Input } from "antd";
 
-
 export default class ParkingLotHomeRegister extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-             loading:false,
-        }
-    }
-    
-    handleOk = () => {
-        this.setState({ loading: true });
-        setTimeout(() => {
-          this.setState({ loading: false });
-        }, 3000);
-      };
-    
-      handleCancel = () => {
-        this.props.closeRegisterModal();
-      };
+  constructor(props) {
+    super(props);
 
-    render() {
-        return (
-            <div>
-                    <Modal
+    this.state = {
+      loading: false,
+    };
+  }
+
+  handleOk = () => {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 3000);
+  };
+
+  handleCancel = () => {
+    this.props.closeRegisterModal();
+  };
+
+  render() {
+    return (
+      <div>
+        <Modal
           destroyOnClose={true}
           visible={this.props.registerModalVisible ? true : false}
           title="Registration"
@@ -52,17 +51,10 @@ export default class ParkingLotHomeRegister extends Component {
             placeholder="Username"
             prefix={<UserOutlined />}
           />
-          <Input.Password
-            size="large"
-            placeholder="Password"
-          />
-            <Input
-            size="large"
-            placeholder="Bank Account Number"
-          />
+          <Input.Password size="large" placeholder="Password" />
+          <Input size="large" placeholder="Bank Account Number" />
         </Modal>
-                
-            </div>
-        )
-    }
+      </div>
+    );
+  }
 }

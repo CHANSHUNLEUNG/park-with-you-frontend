@@ -7,18 +7,14 @@ export default class ParkingLotHomeUserInfo extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-
-    };
+    this.state = {};
   }
-
 
   handleCancel = () => {
     this.props.closeUserInfoModal();
   };
 
   render() {
-
     return (
       <div>
         <Modal
@@ -31,14 +27,14 @@ export default class ParkingLotHomeUserInfo extends Component {
             <Button key="back" onClick={this.handleCancel}>
               Return
             </Button>,
-                       <Button key="update" onClick={this.handleCancel}>
-                       Update User Info
-                     </Button>
+            <Button key="update" onClick={this.handleCancel}>
+              Update User Info
+            </Button>,
           ]}
         >
-            user ID : <br />
-            Name : <br />
-            Bank Account : <br />
+          user ID : <br />
+          Name : <br />
+          Bank Account : <br />
         </Modal>
       </div>
     );
