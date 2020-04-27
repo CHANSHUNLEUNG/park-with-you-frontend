@@ -54,7 +54,6 @@ export default class PaymentForm extends Component {
   }
 
   isPaymentValid() {
-    return true
     return (
       this.props.parkingLot.available_count > 0 &&
       this.state.startingTime !== null
