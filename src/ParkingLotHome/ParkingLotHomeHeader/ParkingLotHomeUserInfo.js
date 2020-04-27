@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./ParkingLotHomeHeader.css";
+import sha256 from "sha256";
 import { Button, Modal, Input, message } from "antd";
 
 export default class ParkingLotHomeUserInfo extends Component {
@@ -89,7 +90,7 @@ export default class ParkingLotHomeUserInfo extends Component {
       message.info("please input a valid bank account. ")
     }
     if (this.state.newPassword===this.state.confirmPassword && bankAccountValid){
-      updateUser= {id:this.props.user.id, name:this.state.newUserName, password:this.state.newPassword, bankAccount:this.state.newBankAccountInfo};
+      updateUser= {id:this.props.user.id, name:this.state.newUserName, password:sha256(this.state.newPassword), bankAccount:this.state.newBankAccountInfo};
       this.setState({
         updatedUserInfo:updateUser,
       })
