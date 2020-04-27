@@ -9,7 +9,7 @@ import {
   Alert,
   notification,
 } from "antd";
-import { FrownOutlined } from "@ant-design/icons";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import moment from "moment";
 import BookingApi from "../apis/BookingApi";
 import ShareLinkModal from "./ShareLinkModal";
@@ -58,6 +58,13 @@ export default class PaymentForm extends Component {
       .then((response) => {
         this.setState({
           paymentSuccess: true,
+        });
+        notification.open({
+          message: "Order Parking Lot Success",
+          description: `${
+            parkingLot.name
+          } with start time ${startingTime.format("HH:mm")}`,
+          icon: <SmileOutlined style={{ color: "#52c41a" }} />,
         });
       })
       .catch((error) => {
