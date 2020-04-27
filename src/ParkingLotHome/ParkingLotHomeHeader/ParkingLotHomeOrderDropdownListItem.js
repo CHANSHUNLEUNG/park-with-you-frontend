@@ -4,15 +4,16 @@ import { Row, Col, InputNumber, Button, Typography } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import moment from "moment";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default class ParkingLotHomeOrderDropdownListItem extends Component {
   static propTypes = {};
   constructor(props) {
-    super(props)
-    this.calculateRemainingTime = this.calculateRemainingTime.bind(this)
-  
+    super(props);
+    this.calculateRemainingTime = this.calculateRemainingTime.bind(this);
+
     this.state = {
+      remainingTimeType: "",
       remainingMinute: 0,
       remainingSecond: 0,
     };
@@ -21,26 +22,34 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
   componentDidMount() {
     this.calculateRemainingTime();
   }
-  
+
   calculateRemainingTime() {
     const endTime = moment(
       this.props.order.startParkingTime,
       "YYYY-MM-DD HH:mm:ss"
-    ).add(8, "hours").add(this.props.order.duration, "seconds");
+    )
+      .add(8, "hours")
+      .add(this.props.order.duration, "seconds");
     const remainingTimeInSecond = endTime.diff(moment(), "seconds");
     if (remainingTimeInSecond <= 0) {
       this.setState({ remainingMinute: 0, remainingSecond: 0 });
     } else {
-      const remainingMinute = parseInt(remainingTimeInSecond / 60)
-      const remainingSecond = parseInt(remainingTimeInSecond % 60)
-      this.setState({ remainingMinute, remainingSecond });
-      setTimeout(this.calculateRemainingTime, 500)
+      const remainingMinute = parseInt(remainingTimeInSecond / 60);
+      const remainingSecond = parseInt(remainingTimeInSecond % 60);
+      let remainingTimeType = "";
+      if (remainingMinute <= 14) {
+        remainingTimeType = "danger";
+      } else if (remainingMinute <= 29) {
+        remainingTimeType = "warning";
+      }
+      this.setState({ remainingMinute, remainingSecond, remainingTimeType });
+      setTimeout(this.calculateRemainingTime, 500);
     }
   }
 
   render() {
-    const { remainingMinute, remainingSecond } = this.state
-    const { order } = this.props
+    const { remainingMinute, remainingSecond, remainingTimeType } = this.state;
+    const { order } = this.props;
     return (
       <div>
         <Row>
@@ -48,19 +57,27 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
             <Title level={4}>
               {order.parkingLotName + " - " + order.parkingPlaceName}
             </Title>
-            <p>{order.address}</p>
-            <p>Price: {order.unitPrice * (parseFloat(order.duration)/3600)}</p>
+            <span>{order.address}</span>
+            <p>
+              Price: ${order.unitPrice * (parseFloat(order.duration) / 3600)}
+            </p>
           </Col>
-          <Col span={6}>
+        </Row>
+        <Row>
+          <Col span={12}>
             <div>
-              <span>
+              <Text type={remainingTimeType}>
+                Remaining Time:&nbsp;
                 {remainingMinute.toString().padStart(2, "0")}:
                 {remainingSecond.toString().padStart(2, "0")}
-              </span>
+              </Text>
             </div>
+          </Col>
+          <Col span={12}>
             <div>
+              Extend:&nbsp;
               <InputNumber min={1} defaultValue={1} />
-              <Button shape="circle" icon={<PlusOutlined />} size="small"/>
+              <Button shape="circle" icon={<PlusOutlined />} size="small" />
             </div>
           </Col>
         </Row>
