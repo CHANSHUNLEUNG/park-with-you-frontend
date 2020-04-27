@@ -69,6 +69,7 @@ export default class ParkingLotHomeHeader extends Component {
     this.setState({
       isLoggedIn: false,
     });
+    this.props.setUser(null);
     this.clearUserName();
   }
 
