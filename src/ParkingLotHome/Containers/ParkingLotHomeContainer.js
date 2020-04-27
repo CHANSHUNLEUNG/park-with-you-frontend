@@ -5,7 +5,7 @@ import { Row, Col } from "antd";
 import ParkingLotHomeBodyContainer from "./ParkingLotHomeBodyContainer";
 import ParkingLotHomeHeaderContainer from "./ParkingLotHomeHeaderContainer";
 import ParkingLotHomeMainContentContainer from "./ParkingLotHomeMainContentContainer";
-import { BACKEND_HOST_URL, PARKING_LOT_INFO_PATH, TEST_PARKING_LOT_LIST } from "../Constants/Constant";
+import { BACKEND_HOST_URL, PARKING_LOT_INFO_PATH, TEST_PARKING_LOT_LIST ,SEARCH_BY_REGION } from "../Constants/Constant";
 
 export default class ParkingLotHomeContainer extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ export default class ParkingLotHomeContainer extends Component {
     this.updateParkingLotsInfo = this.updateParkingLotsInfo.bind(this);
     this.sortParkingLotsByPrice = this.sortParkingLotsByPrice.bind(this);
     this.sortParkingLotsByAvailable = this.sortParkingLotsByAvailable.bind(this);
+    this.updateListBySearchedRegion = this.updateListBySearchedRegion.bind(this);
     this.onListItemClicked = this.onListItemClicked.bind(this);
     this.setUser = this.setUser.bind(this);
 
@@ -74,9 +75,16 @@ export default class ParkingLotHomeContainer extends Component {
     this.setState({ user });
   }
 
-  getSearchBarInput(inputValue){
-    console.log("In ParkingLotHomeContainer: "+ inputValue);
+  updateListBySearchedRegion(inputValue){
+    axios.get(BACKEND_HOST_URL + PARKING_LOT_INFO_PATH + SEARCH_BY_REGION + inputValue.trim()).then((response) => {
+      response.status === 200
+        ? this.setState({
+          parkingLotsInfo: response.data,
+        })
+        : console.log("Error, cannot get parking lots info");
+    });
   }
+
 
   render() {
     return (
@@ -93,7 +101,7 @@ export default class ParkingLotHomeContainer extends Component {
               sortParkingLotsByAvailable={this.sortParkingLotsByAvailable}
               parkingLotsInfo={this.state.parkingLotsInfo}
               onListItemClicked={this.onListItemClicked}
-              getSearchBarInput={this.getSearchBarInput}
+              updateListBySearchedRegion={this.updateListBySearchedRegion}
             />
           </Col>
           <Col span={14}>

@@ -52,7 +52,7 @@ export default class ParkingLotHomeBodyListHeader extends Component {
 
   getSearchBarInput(value) {
       console.log("User input: "+value.trim());
-      this.props.getSearchBarInput(value.trim());
+      this.props.updateListBySearchedRegion(value.trim());
 
   }
 

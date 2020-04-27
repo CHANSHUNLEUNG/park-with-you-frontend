@@ -26,7 +26,7 @@ export default class ParkingLotHomeBodyContainer extends Component {
                                     sortParkingLotsByAvailable={this.props.sortParkingLotsByAvailable}
                                     parkingLotsInfo={this.props.parkingLotsInfo}
                                     onListItemClicked={this.props.onListItemClicked}
-                                    getSearchBarInput={this.props.getSearchBarInput} />
+                                    updateListBySearchedRegion={this.props.updateListBySearchedRegion} />
                             </Col>
                         </Row>
                     </Col>
