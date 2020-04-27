@@ -37,6 +37,7 @@ export default class ParkingLotHomeHeader extends Component {
       userInfoModalVisible: false,
       userId: 0,
       userName: USER_NAME_INIT_STATE,
+      user:[],
     };
   }
 
@@ -135,7 +136,11 @@ export default class ParkingLotHomeHeader extends Component {
   }
 
   setUser(user) {
-    this.props.setUser(user)
+    this.props.setUser(user);
+    this.setState({
+      user:user}, () => {
+        console.log(this.state.user)
+    });
   }
 
   render() {
@@ -193,6 +198,7 @@ export default class ParkingLotHomeHeader extends Component {
                     <ParkingLotHomeUserInfo
                       userInfoModalVisible={this.state.userInfoModalVisible}
                       closeUserInfoModal={this.closeUserInfoModal}
+                      user = {this.state.user}
                     />
                     <ParkingLotHomeRegister
                       registerModalVisible={this.state.registerModalVisible}
