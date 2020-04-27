@@ -9,7 +9,7 @@ import { USER_NAME_INIT_STATE } from "../Constants/Constant";
 import ParkingLotHomeLogin from "./ParkingLotHomeLogin";
 import ParkingLotHomeUserInfo from "./ParkingLotHomeUserInfo";
 import ParkingLotHomeRegister from "./ParkingLotHomeRegister";
-import ParkingLotHomeHeaderOrderDropdown from "./ParkingLotHomeHeaderOrderDropdown";
+import ParkingLotHomeOrderDropdown from "./ParkingLotHomeOrderDropdown";
 
 const { Header } = Layout;
 
@@ -199,7 +199,7 @@ export default class ParkingLotHomeHeader extends Component {
                       closeRegisterModal={this.closeRegisterModal}
                     />
                     <div className="order-dropdown">
-                      <ParkingLotHomeHeaderOrderDropdown />
+                      <ParkingLotHomeOrderDropdown />
                     </div>
                   </div>
                 </Col>

@@ -47,6 +47,9 @@
   top: 46px;
   left: -400px;
 }
+.order-dropdown-root{
+  width: 500px;
+}
 .order-button{
   width: 150px;
 }
