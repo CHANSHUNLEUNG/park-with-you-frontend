@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./ParkingLotHomeHeader.css";
-import { UserOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 
 export default class ParkingLotHomeUserInfo extends Component {
