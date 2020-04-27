@@ -66,6 +66,7 @@ export default class PaymentForm extends Component {
           } with start time ${startingTime.format("HH:mm")}`,
           icon: <SmileOutlined style={{ color: "#52c41a" }} />,
         });
+        this.props.onBookedLot()
       })
       .catch((error) => {
         const response = error.response.data;
