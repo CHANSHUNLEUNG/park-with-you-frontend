@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Button, Modal, message, Input } from "antd";
-import { SettingOutlined } from "@ant-design/icons";
+import { CopyOutlined } from "@ant-design/icons";
 import shareLinkApp from "../images/shareLinkApp.JPG";
+import "./ParkingLotHomeMainContent.css";
 
 export default class ShareLinkModal extends Component {
   constructor(props) {
@@ -48,12 +49,13 @@ export default class ShareLinkModal extends Component {
             <div>Direct Link</div>
             <br />
             <Input
-              addonAfter={<SettingOutlined />}
+              addonAfter={<CopyOutlined />}
               defaultValue="https://www.park-with-you.com"
             />
           </div>
           <div>
-            <img src={shareLinkApp} alt="" />
+              Share to <br /><br/>
+            <img src={shareLinkApp} alt="" className="AppIcon" />
           </div>
         </Modal>
       </div>

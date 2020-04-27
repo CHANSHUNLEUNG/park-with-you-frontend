@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined } from "@ant-design/icons";
-import sha256 from "sha256";
+//import sha256 from "sha256";
 import { Button, Modal, Input } from "antd";
 import axios from "axios";
 import { BACKEND_HOST_URL ,CUSTOMER_INFO_PATH} from "../Constants/Constant";
@@ -41,9 +41,9 @@ export default class ParkingLotHomeLogin extends Component {
   }
 
   getPasswordInput(event) {
-    let passwordInputHash = sha256(event.target.value.trim());
+    //let passwordInputHash = sha256(event.target.value.trim());
     this.setState({
-      passwordInput: passwordInputHash,
+      passwordInput: event.target.value.trim(),
     });
   }
 
