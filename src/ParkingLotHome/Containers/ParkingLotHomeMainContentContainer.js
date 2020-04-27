@@ -19,7 +19,11 @@ export default class ParkingLotHomeMainContentContainer extends Component {
         {selectedParkingLot ? (
           <div>
             <ParkingLotDetails parkingLot={selectedParkingLot} />
-            <PaymentForm parkingLot={selectedParkingLot} customer={user} />
+            <PaymentForm
+              parkingLot={selectedParkingLot}
+              customer={user}
+              onBookedLot={this.props.onBookedLot}
+            />
           </div>
         ) : null}
       </div>

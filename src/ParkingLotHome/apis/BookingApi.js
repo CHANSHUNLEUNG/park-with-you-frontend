@@ -8,11 +8,16 @@ class BookingApi {
       duration: durationHours * 60 * 60
     });
   }
+
   static extendBooking(orderId, duration) {
     return axios.post(
       BACKEND_HOST_URL + `${PARKING_ORDER_INFO_PATH}/${orderId}`,
       { duration: duration * 60 * 60 }
     );
+  }
+
+  static getAllOrders(userId) {
+    return axios.get(BACKEND_HOST_URL + `${PARKING_ORDER_INFO_PATH}/customers/${userId}`)
   }
 }
 

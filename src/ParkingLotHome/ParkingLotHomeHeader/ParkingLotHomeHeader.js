@@ -32,7 +32,6 @@ export default class ParkingLotHomeHeader extends Component {
     this.registerFailedAsInappropriateInput = this.registerFailedAsInappropriateInput.bind(this);
     this.registerSuccess = this.registerSuccess.bind(this);
 
-
     this.state = {
       isLoggedIn: false,
       LoginModalvisible: false,
@@ -224,7 +223,7 @@ export default class ParkingLotHomeHeader extends Component {
                       registerSuccess = {this.registerSuccess}
                     />
                     <div className="order-dropdown">
-                      <ParkingLotHomeOrderDropdown />
+                      <ParkingLotHomeOrderDropdown orders={this.props.orders} />
                     </div>
                   </div>
                 </Col>
