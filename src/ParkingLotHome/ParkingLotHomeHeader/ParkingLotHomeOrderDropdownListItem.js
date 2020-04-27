@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Row, Col, InputNumber, Button, Typography } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import moment from "moment";
+import BookingApi from "../apis/BookingApi";
 
 const { Title, Text } = Typography;
 
@@ -11,11 +12,15 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
   constructor(props) {
     super(props);
     this.calculateRemainingTime = this.calculateRemainingTime.bind(this);
-
+    this.onExtendButtonClick = this.onExtendButtonClick.bind(this);
+    this.onDurationChange = this.onDurationChange.bind(this);
+    
     this.state = {
       remainingTimeType: "",
       remainingMinute: 0,
       remainingSecond: 0,
+      duration: 1,
+      order: this.props.order
     };
   }
 
@@ -25,11 +30,11 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
 
   calculateRemainingTime() {
     const endTime = moment(
-      this.props.order.startParkingTime,
+      this.state.order.startParkingTime,
       "YYYY-MM-DD HH:mm:ss"
     )
       .add(8, "hours")
-      .add(this.props.order.duration, "seconds");
+      .add(this.state.order.duration, "seconds");
     const remainingTimeInSecond = endTime.diff(moment(), "seconds");
     if (remainingTimeInSecond <= 0) {
       this.setState({ remainingMinute: 0, remainingSecond: 0 });
@@ -47,9 +52,27 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
     }
   }
 
+  onDurationChange(value) {
+    this.setState({ duration: value });
+  }
+
+
+  onExtendButtonClick() {
+    BookingApi.extendBooking(this.state.order.orderId, this.state.duration)
+      .then(response => {
+        this.setState((prevSate) => ({
+          order: {
+            ...prevSate.order,
+            duration: response.data.duration,
+          },
+        }));
+
+      })
+      .catch();
+  }
+
   render() {
-    const { remainingMinute, remainingSecond, remainingTimeType } = this.state;
-    const { order } = this.props;
+    const { order, remainingMinute, remainingSecond, remainingTimeType } = this.state;
     return (
       <div>
         <Row>
@@ -76,8 +99,8 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
           <Col span={12}>
             <div>
               Extend:&nbsp;
-              <InputNumber min={1} defaultValue={1} />
-              <Button shape="circle" icon={<PlusOutlined />} size="small" />
+              <InputNumber min={1} defaultValue={1} onChange={this.onDurationChange}/>
+              <Button shape="circle" icon={<PlusOutlined />} size="small" onClick={this.onExtendButtonClick}/>
             </div>
           </Col>
         </Row>
