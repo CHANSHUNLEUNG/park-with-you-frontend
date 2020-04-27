@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined } from "@ant-design/icons";
 import { Button, Modal, Input } from "antd";
+import sha256 from "sha256";
 import axios from "axios";
 import { BACKEND_HOST_URL ,CUSTOMER_INFO_PATH} from "../Constants/Constant";
 
@@ -37,23 +38,20 @@ export default class ParkingLotHomeRegister extends Component {
 
   getNewUserNameInput(event) {
     let userNameString = event.target.value.trim();
-    console.log(userNameString);
     this.setState({
       newUsernameInput: userNameString,
     });
   }
 
   getNewUserPasswordInput(event) {
-    let userPasswordString = event.target.value.trim();
-    console.log(userPasswordString);
+    let userPasswordStringHash =  sha256(event.target.value.trim());
     this.setState({
-      newPasswordInput: userPasswordString,
+      newPasswordInput: userPasswordStringHash,
     });
   }
 
   getNewBankAccountInput(event) {
     let userBankAccountString = event.target.value.trim();
-    console.log(userBankAccountString);
     this.setState({
       newBankAccountInput: userBankAccountString,
     });
@@ -75,7 +73,6 @@ export default class ParkingLotHomeRegister extends Component {
 
    checkIfNotExist(){
     for(let index = 0; index< this.state.accountNameList.length; index++){
-      console.log(this.state.accountNameList[index]);
       if(this.state.newUsernameInput === this.state.accountNameList[index]){
       return false;
       }
