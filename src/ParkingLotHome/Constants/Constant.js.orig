@@ -7,6 +7,9 @@ export const SORT_BY_NAME = "name";
 export const SORT_BY_DISTANCE = "distance";
 export const SORT_BY_AVAILABLE = "available";
 export const SORT_BY_PRICE = "price";
+<<<<<<< HEAD
 export const USER_NAME_INIT_STATE = "Register";
 export const SEARCH_BY_REGION = "?region=";
-
+=======
+export const USER_NAME_INIT_STATE = "Register";
+>>>>>>> 9d3e3000415923ac4fbebfe34cd464fe6f9040b5
