@@ -58,7 +58,7 @@ export default class ParkingLotHomeLogin extends Component {
       .then((response) => {
         if (response.status === 200) {
           this.props.confirmLogin();
-          this.props.setUser(response.data)
+          this.props.setUser(response.data);
           this.props.showUserName(this.state.usernameInput);
         } 
       })

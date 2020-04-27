@@ -6,9 +6,14 @@ import { Button, Modal, Input } from "antd";
 export default class ParkingLotHomeRegister extends Component {
   constructor(props) {
     super(props);
-
+    this.getNewUserNameInput = this.getNewUserNameInput.bind(this);
+    this.getNewUserPasswordInput = this.getNewUserPasswordInput.bind(this);
+    this.getNewBankAccountInput = this.getNewBankAccountInput.bind(this);
     this.state = {
       loading: false,
+      newUsernameInput: "",
+      newPasswordInput: "",
+      newBankAccountInput: "",
     };
   }
 
@@ -22,6 +27,30 @@ export default class ParkingLotHomeRegister extends Component {
   handleCancel = () => {
     this.props.closeRegisterModal();
   };
+
+  getNewUserNameInput(event) {
+    let userNameString = event.target.value.trim();
+    console.log(userNameString);
+    this.setState({
+      newUsernameInput: userNameString,
+    });
+  }
+
+  getNewUserPasswordInput(event) {
+    let userPasswordString = event.target.value.trim();
+    console.log(userPasswordString);
+    this.setState({
+      newPasswordInput: userPasswordString,
+    });
+  }
+
+  getNewBankAccountInput(event) {
+    let userBankAccountString = event.target.value.trim();
+    console.log(userBankAccountString);
+    this.setState({
+      newBankAccountInput: userBankAccountString,
+    });
+  }
 
   render() {
     return (
@@ -49,10 +78,19 @@ export default class ParkingLotHomeRegister extends Component {
           <Input
             size="large"
             placeholder="Username"
+            onChange={this.getNewUserNameInput}
             prefix={<UserOutlined />}
           />
-          <Input.Password size="large" placeholder="Password" />
-          <Input size="large" placeholder="Bank Account Number" />
+          <Input.Password
+            size="large"
+            placeholder="Password"
+            onChange={this.getNewUserPasswordInput}
+          />
+          <Input
+            size="large"
+            placeholder="Bank Account Number"
+            onChange={this.getNewBankAccountInput}
+          />
         </Modal>
       </div>
     );
