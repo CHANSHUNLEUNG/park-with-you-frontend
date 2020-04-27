@@ -13,11 +13,11 @@ export default class ParkingLotHomeBodyListHeader extends Component {
         }
     }
 
-    sortParkingLotsInfo() {
-        if (this.state.sortBy === SORT_BY_PRICE) {
+    sortParkingLotsInfo(sortMethod) {
+        if (sortMethod === SORT_BY_PRICE) {
             this.props.sortParkingLotsByPrice();
         }
-        if (this.state.sortBy === SORT_BY_AVAILABLE) {
+        if (sortMethod === SORT_BY_AVAILABLE) {
             this.props.sortParkingLotsByAvailable();
         }
     }
@@ -26,7 +26,7 @@ export default class ParkingLotHomeBodyListHeader extends Component {
         const sortMethod = event.target.value;
         this.setState({
             sortBy: sortMethod
-        }, this.sortParkingLotsInfo())
+        }, this.sortParkingLotsInfo(sortMethod))
     }
 
     render() {

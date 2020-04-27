@@ -5,7 +5,7 @@ import { Row, Col } from "antd";
 import ParkingLotHomeBodyContainer from "./ParkingLotHomeBodyContainer";
 import ParkingLotHomeHeaderContainer from "./ParkingLotHomeHeaderContainer";
 import ParkingLotHomeMainContentContainer from "./ParkingLotHomeMainContentContainer";
-import { BACKEND_HOST_URL, PARKING_LOT_INFO_PATH } from "../Constants/Constant";
+import { BACKEND_HOST_URL, PARKING_LOT_INFO_PATH, TEST_PARKING_LOT_LIST } from "../Constants/Constant";
 
 export default class ParkingLotHomeContainer extends Component {
   constructor(props) {
@@ -28,18 +28,21 @@ export default class ParkingLotHomeContainer extends Component {
 
   componentDidMount() {
     // static test
-    // this.setState({
-    //     parkingLotsInfo: TEST_PARKING_LOT_LIST
-    // }, this.sortParkingLotsByPrice());
+    this.setState({
+      parkingLotsInfo: TEST_PARKING_LOT_LIST
+    }, this.sortParkingLotsByPrice());
 
     // production
-    this.updateParkingLotsInfo();
+    // this.updateParkingLotsInfo();
   }
 
   sortParkingLotsByPrice() {
     let cloneParkingLotsInfo = this.state.parkingLotsInfo.slice();
     let sortedData = cloneParkingLotsInfo.sort((first, second) => {
-      return first["unitPrice"] - second["unitPrice"];
+      if (first["unitPrice"] < second["unitPrice"]) {
+        return 1;
+      }
+      return (first["unitPrice"] > second["unitPrice"]) ? -1 : 0;
     });
 
     this.setState({
@@ -62,8 +65,8 @@ export default class ParkingLotHomeContainer extends Component {
     axios.get(BACKEND_HOST_URL + PARKING_LOT_INFO_PATH).then((response) => {
       response.status === 200
         ? this.setState({
-            parkingLotsInfo: response.data,
-          })
+          parkingLotsInfo: response.data,
+        })
         : console.log("Error, cannot get parking lots info");
     });
   }
