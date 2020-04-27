@@ -153,8 +153,7 @@ export default class ParkingLotHomeHeader extends Component {
   setUser(user) {
     this.props.setUser(user);
     this.setState({
-      user:user}, () => {
-        console.log(this.state.user)
+      user:user
     });
   }
 

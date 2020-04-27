@@ -2,29 +2,28 @@ import React, { Component } from "react";
 import "./ParkingLotHomeHeader.css";
 import sha256 from "sha256";
 import { Button, Modal, Input, message } from "antd";
+import axios from "axios";
+import { BACKEND_HOST_URL } from "../Constants/Constant";
 
 export default class ParkingLotHomeUserInfo extends Component {
   constructor(props) {
     super(props);
 
     this.updateAccountInfo = this.updateAccountInfo.bind(this);
-    this.closeUpdateInfoModal=this.closeUpdateInfoModal.bind(this);
+    this.closeUpdateInfoModal = this.closeUpdateInfoModal.bind(this);
     this.getUsernameInput = this.getUsernameInput.bind(this);
-    this.getPasswordInput=this.getPasswordInput.bind(this);
-    this.getBankAccount=this.getBankAccount.bind(this);
+    this.getPasswordInput = this.getPasswordInput.bind(this);
+    this.getBankAccount = this.getBankAccount.bind(this);
     this.getConfirmPasswordInput = this.getConfirmPasswordInput.bind(this);
     this.onUpdateAccountInfo = this.onUpdateAccountInfo.bind(this);
 
-
-
     this.state = {
-      updateInfoModalVisible:false,
-      updatedUserInfo:[],
-      newBankAccountInfo:"",
-      confirmPassword:"",
-      newPassword:"",
-      newUserName:""
-
+      updateInfoModalVisible: false,
+      updatedUserInfo: {},
+      newBankAccountInfo: "",
+      confirmPassword: "",
+      newPassword: "",
+      newUserName: "",
     };
   }
 
@@ -32,14 +31,14 @@ export default class ParkingLotHomeUserInfo extends Component {
     this.props.closeUserInfoModal();
   };
 
-  updateAccountInfo(){
+  updateAccountInfo() {
     this.props.closeUserInfoModal();
     this.setState({
-      updateInfoModalVisible:true,
+      updateInfoModalVisible: true,
     });
   }
 
-  closeUpdateInfoModal(){
+  closeUpdateInfoModal() {
     this.setState((prevState) => {
       return {
         updateInfoModalVisible: !prevState.updateInfoModalVisible,
@@ -47,55 +46,74 @@ export default class ParkingLotHomeUserInfo extends Component {
     });
   }
 
-  
   getUsernameInput(event) {
     let userNameString = event.target.value.trim();
     this.setState({
-      newUserName:userNameString,
-    })
-
+      newUserName: userNameString,
+    });
   }
 
   getPasswordInput(event) {
-    let passwordInput =(event.target.value.trim());
+    let passwordInput = event.target.value.trim();
     this.setState({
-      newPassword:passwordInput,
-    })
-
+      newPassword: passwordInput,
+    });
   }
 
-  getConfirmPasswordInput(event){
-    let confirmedPassword =(event.target.value.trim());
+  getConfirmPasswordInput(event) {
+    let confirmedPassword = event.target.value.trim();
     this.setState({
       confirmPassword: confirmedPassword,
-    })
+    });
   }
 
-  getBankAccount(event){
-    let bankAccount =(event.target.value.trim());
+  getBankAccount(event) {
+    let bankAccount = event.target.value.trim();
     this.setState({
       newBankAccountInfo: bankAccount,
-    })
+    });
   }
 
-  onUpdateAccountInfo (){
+  onUpdateAccountInfo() {
     var regex = /^[0-9]{3}[\-][0-9]{3}[\-][0-9]{3}?$/;
     var bankAccountValid = regex.test(this.state.newBankAccountInfo);
     var updateUser = {};
     console.log(updateUser);
-    if(this.state.newPassword!==this.state.confirmPassword){
-      message.info("please confirm your password again. ")
+    if (this.state.newPassword !== this.state.confirmPassword) {
+      message.info("please confirm your password again. ");
     }
-    if(!bankAccountValid){
-      message.info("please input a valid bank account. ")
+    if (!bankAccountValid) {
+      message.info("please input a valid bank account. ");
     }
-    if (this.state.newPassword===this.state.confirmPassword && bankAccountValid){
-      updateUser= {id:this.props.user.id, name:this.state.newUserName, password:sha256(this.state.newPassword), bankAccount:this.state.newBankAccountInfo};
+    if (
+      this.state.newPassword === this.state.confirmPassword &&
+      bankAccountValid
+    ) {
+      updateUser = {
+        id: this.props.user.id,
+        name: this.state.newUserName,
+        password: sha256(this.state.newPassword),
+        bankAccount: this.state.newBankAccountInfo,
+      };
       this.setState({
-        updatedUserInfo:updateUser,
-      })
+        updatedUserInfo: updateUser,
+      });
     }
     console.log(updateUser);
+  }
+
+  saveUpdatedInfoToDatabase() {
+    axios
+      .put(BACKEND_HOST_URL, this.state.updatedUserInfo)
+      .then((response) => {
+        if (response.status === 200) {
+          message.info("updated account information successfully. ");
+          this.closeUpdateInfoModal();
+        }
+      })
+      .catch(() => {
+        console.log("Error, cannot updat customer info");
+      });
   }
 
   render() {
@@ -116,13 +134,16 @@ export default class ParkingLotHomeUserInfo extends Component {
             </Button>,
           ]}
         >
-          user ID : {this.props.user.id}<br />
-          Name : {this.props.user.name}<br />
-          Bank Account : {this.props.user.bankAccount}<br />
+          user ID : {this.props.user.id}
+          <br />
+          Name : {this.props.user.name}
+          <br />
+          Bank Account : {this.props.user.bankAccount}
+          <br />
         </Modal>
         <Modal
           destroyOnClose={true}
-          visible={this.state.updateInfoModalVisible? true : false}
+          visible={this.state.updateInfoModalVisible ? true : false}
           title="Update Account Information"
           onOk={this.closeUpdateInfoModal}
           onCancel={this.closeUpdateInfoModal}
@@ -133,28 +154,30 @@ export default class ParkingLotHomeUserInfo extends Component {
             <Button key="update" onClick={this.onUpdateAccountInfo}>
               Submit
             </Button>,
-          ]}      
+          ]}
         >
-            <Input
+          <Input
             size="large"
             placeholder="Username"
             onChange={this.getUsernameInput}
-          /><br/>
+          />
+          <br />
           <Input.Password
             size="large"
             placeholder="Password"
             onChange={this.getPasswordInput}
           />
-            <Input.Password
+          <Input.Password
             size="large"
             placeholder="Confirm Password"
             onChange={this.getConfirmPasswordInput}
           />
-            <Input
+          <Input
             size="large"
             placeholder="bank account number: xxx-xxx-xxx"
             onChange={this.getBankAccount}
-          /><br/>
+          />
+          <br />
         </Modal>
       </div>
     );
