@@ -13,9 +13,7 @@ export default class ParkingLotHomeContainer extends Component {
 
     this.updateParkingLotsInfo = this.updateParkingLotsInfo.bind(this);
     this.sortParkingLotsByPrice = this.sortParkingLotsByPrice.bind(this);
-    this.sortParkingLotsByAvailable = this.sortParkingLotsByAvailable.bind(
-      this
-    );
+    this.sortParkingLotsByAvailable = this.sortParkingLotsByAvailable.bind(this);
     this.onListItemClicked = this.onListItemClicked.bind(this);
     this.setUser = this.setUser.bind(this);
 
@@ -30,7 +28,7 @@ export default class ParkingLotHomeContainer extends Component {
     // static test
     // this.setState({
     //   parkingLotsInfo: TEST_PARKING_LOT_LIST
-    // }, this.sortParkingLotsByPrice());
+    // },() => this.sortParkingLotsByPrice());
 
     // production
     this.updateParkingLotsInfo();
@@ -39,10 +37,7 @@ export default class ParkingLotHomeContainer extends Component {
   sortParkingLotsByPrice() {
     let cloneParkingLotsInfo = this.state.parkingLotsInfo.slice();
     let sortedData = cloneParkingLotsInfo.sort((first, second) => {
-      if (first["unitPrice"] < second["unitPrice"]) {
-        return 1;
-      }
-      return (first["unitPrice"] > second["unitPrice"]) ? -1 : 0;
+      return first["unitPrice"] - second["unitPrice"];
     });
 
     this.setState({
@@ -54,7 +49,7 @@ export default class ParkingLotHomeContainer extends Component {
     let cloneParkingLotsInfo = this.state.parkingLotsInfo.slice();
     let sortedData = cloneParkingLotsInfo.sort((first, second) => {
       return first["availableCount"] - second["availableCount"];
-    });
+    }).reverse();
 
     this.setState({
       parkingLotsInfo: sortedData,
