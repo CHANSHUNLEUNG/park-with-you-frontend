@@ -3,6 +3,7 @@ pipeline {
   environment{
     DOCKER_IMAGE = 'tatp-react-frontend'
     DOCKER_NAME = 'react'
+    REACT_APP_API_HOST = 'http://hk3cvdv00648:9400'
   }
   stages{
     stage('Build') {
