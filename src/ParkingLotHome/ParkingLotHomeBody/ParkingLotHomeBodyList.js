@@ -11,6 +11,7 @@ export default class ParkingLotHomeBodyList extends Component {
                     header={<ParkingLotHomeBodyListHeader
                         sortParkingLotsByPrice={this.props.sortParkingLotsByPrice}
                         sortParkingLotsByAvailable={this.props.sortParkingLotsByAvailable}
+                        getSearchBarInput={this.props.getSearchBarInput}
                     />}
                     bordered
                     dataSource={this.props.parkingLotsInfo}

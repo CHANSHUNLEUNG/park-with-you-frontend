@@ -74,6 +74,10 @@ export default class ParkingLotHomeContainer extends Component {
     this.setState({ user });
   }
 
+  getSearchBarInput(inputValue){
+    console.log("In ParkingLotHomeContainer: "+ inputValue);
+  }
+
   render() {
     return (
       <>
@@ -89,6 +93,7 @@ export default class ParkingLotHomeContainer extends Component {
               sortParkingLotsByAvailable={this.sortParkingLotsByAvailable}
               parkingLotsInfo={this.state.parkingLotsInfo}
               onListItemClicked={this.onListItemClicked}
+              getSearchBarInput={this.getSearchBarInput}
             />
           </Col>
           <Col span={14}>

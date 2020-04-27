@@ -50,6 +50,12 @@ export default class ParkingLotHomeBodyListHeader extends Component {
     );
   }
 
+  getSearchBarInput(value) {
+      console.log("User input: "+value.trim());
+      this.props.getSearchBarInput(value.trim());
+
+  }
+
   render() {
     return (
       <>
@@ -60,7 +66,7 @@ export default class ParkingLotHomeBodyListHeader extends Component {
               enterButton="Search"
               size="large"
               suffix={SUFFIX}
-              onSearch={(value) => console.log(value)}
+              onSearch={(value) => this.getSearchBarInput(value)}
             />
             <Radio.Group
               value={this.state.sortBy}
