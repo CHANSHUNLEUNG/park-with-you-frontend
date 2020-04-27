@@ -14,8 +14,8 @@ export default class ParkingLotDetails extends Component {
         <Typography.Title style={{textAlign: "center"}}>{parkingLot.name}</Typography.Title>
         <Card>
           <p>Address: {parkingLot.address}</p>
-          <p>Price per hour: {parkingLot.unit_price}</p>
-          <p>Current Available Place: {parkingLot.available_count}</p>
+          <p>Price per hour: {parkingLot.unitPrice}</p>
+          <p>Current Available Place: {parkingLot.availableCount}</p>
         </Card>
       </div>
     );

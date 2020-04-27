@@ -19,8 +19,8 @@ export default class ParkingLotHomeBodyListItem extends Component {
       <div>
         <div>{item.address}</div>
         <div>&nbsp;</div>
-        <div>{"Price: $" + item.available_count + "/hour"}</div>
-        <div>{"Available: " + item.unit_price}</div>
+        <div>{"Price: $" + item.availableCount + "/hour"}</div>
+        <div>{"Available: " + item.unitPrice}</div>
       </div>
     );
     return (

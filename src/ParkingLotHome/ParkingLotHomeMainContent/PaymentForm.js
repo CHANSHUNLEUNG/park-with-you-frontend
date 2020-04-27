@@ -55,7 +55,7 @@ export default class PaymentForm extends Component {
 
   isPaymentValid() {
     return (
-      this.props.parkingLot.available_count > 0 &&
+      this.props.parkingLot.availableCount > 0 &&
       this.state.startingTime !== null
     );
   }
@@ -100,7 +100,7 @@ export default class PaymentForm extends Component {
             Hours
           </div>
           <div style={{ textAlign: "right" }}>
-            <p>Total Price: ${parkingLot.unit_price * this.state.duration} </p>
+            <p>Total Price: ${parkingLot.unitPrice * this.state.duration} </p>
           </div>
         </Card>
         <div style={{ textAlign: "right", marginTop: "24px" }}>

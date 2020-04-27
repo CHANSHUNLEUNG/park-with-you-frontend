@@ -39,7 +39,7 @@ export default class ParkingLotHomeContainer extends Component {
   sortParkingLotsByPrice() {
     let cloneParkingLotsInfo = this.state.parkingLotsInfo.slice();
     let sortedData = cloneParkingLotsInfo.sort((first, second) => {
-      return first["unit_price"] - second["unit_price"];
+      return first["unitPrice"] - second["unitPrice"];
     });
 
     this.setState({
@@ -50,7 +50,7 @@ export default class ParkingLotHomeContainer extends Component {
   sortParkingLotsByAvailable() {
     let cloneParkingLotsInfo = this.state.parkingLotsInfo.slice();
     let sortedData = cloneParkingLotsInfo.sort((first, second) => {
-      return first["available_count"] - second["available_count"];
+      return first["availableCount"] - second["availableCount"];
     });
 
     this.setState({
