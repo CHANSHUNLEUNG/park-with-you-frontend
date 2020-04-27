@@ -34,7 +34,7 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
       const remainingMinute = parseInt(remainingTimeInSecond / 60)
       const remainingSecond = parseInt(remainingTimeInSecond % 60)
       this.setState({ remainingMinute, remainingSecond });
-      setTimeout(this.calculateRemainingTime, 0)
+      setTimeout(this.calculateRemainingTime, 500)
     }
   }
 
