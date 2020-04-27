@@ -42,3 +42,11 @@
   font-family: 'Franklin Gothic Medium';
 }
 
+.order-dropdown{
+  position: absolute;
+  top: 46px;
+  left: -400px;
+}
+.order-button{
+  width: 150px;
+}
