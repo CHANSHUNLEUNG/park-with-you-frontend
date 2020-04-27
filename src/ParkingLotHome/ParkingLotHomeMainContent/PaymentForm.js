@@ -24,6 +24,7 @@ export default class PaymentForm extends Component {
     this.state = {
       duration: 1,
       startingTime: moment(),
+      paymentSuccess:true,
     };
   }
 
@@ -42,7 +43,11 @@ export default class PaymentForm extends Component {
       startingTime,
       duration
     )
-      .then((response) => {})
+      .then((response) => {
+        this.setState({
+          paymentSuccess:true,
+        })
+      })
       .catch((error) => {
         const response = error.response.data
         notification.open({
@@ -109,7 +114,8 @@ export default class PaymentForm extends Component {
             onClick={this.onSubmitPayment}
           >
             Proceed to payment
-          </Button>
+          </Button><br /><br/>
+          <Button type="link" disabled={!this.state.paymentSuccess}>Share Link To Get Coupon</Button>
         </div>
       </div>
     );
