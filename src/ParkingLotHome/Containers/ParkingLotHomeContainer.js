@@ -87,7 +87,7 @@ export default class ParkingLotHomeContainer extends Component {
   }
 
   updateListBySearchedRegion(inputValue) {
-    if(inputValue===""){
+    if (inputValue === "") {
       this.updateParkingLotsInfo();
     }
     if (inputValue !== "") {
