@@ -26,6 +26,7 @@ export default class ParkingLotHomeHeader extends Component {
     this.failLogin = this.failLogin.bind(this);
     this.showUserName = this.showUserName.bind(this);
     this.checkLoginStatus = this.checkLoginStatus.bind(this);
+    this.setUser = this.setUser.bind(this);
     
 
     this.state = {
@@ -68,6 +69,7 @@ export default class ParkingLotHomeHeader extends Component {
     this.setState({
       isLoggedIn: false,
     });
+    this.props.setUser(null);
     this.clearUserName();
   }
 
@@ -131,6 +133,10 @@ export default class ParkingLotHomeHeader extends Component {
     }
   }
 
+  setUser(user) {
+    this.props.setUser(user)
+  }
+
   render() {
     return (
       <div>
@@ -181,6 +187,7 @@ export default class ParkingLotHomeHeader extends Component {
                       confirmLogin={this.confirmLogin}
                       failLogin={this.failLogin}
                       showUserName={this.showUserName}
+                      setUser={this.setUser}
                     />
                     <ParkingLotHomeUserInfo 
                     userInfoModalVisible = {this.state.userInfoModalVisible}
