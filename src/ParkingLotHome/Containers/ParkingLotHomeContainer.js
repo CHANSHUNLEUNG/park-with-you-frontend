@@ -8,9 +8,9 @@ import ParkingLotHomeMainContentContainer from "./ParkingLotHomeMainContentConta
 import {
   BACKEND_HOST_URL,
   PARKING_LOT_INFO_PATH,
-  TEST_PARKING_LOT_LIST,
   SEARCH_BY_REGION,
 } from "../Constants/Constant";
+import BookingApi from "../apis/BookingApi";
 
 export default class ParkingLotHomeContainer extends Component {
   constructor(props) {
@@ -26,11 +26,13 @@ export default class ParkingLotHomeContainer extends Component {
     );
     this.onListItemClicked = this.onListItemClicked.bind(this);
     this.setUser = this.setUser.bind(this);
+    this.getAllOrders = this.getAllOrders.bind(this);
 
     this.state = {
       parkingLotsInfo: [],
       selectedItem: null,
       user: null,
+      orders: []
     };
   }
 
@@ -83,7 +85,7 @@ export default class ParkingLotHomeContainer extends Component {
   }
 
   setUser(user) {
-    this.setState({ user });
+    this.setState({ user }, this.getAllOrders);
   }
 
   updateListBySearchedRegion(inputValue) {
@@ -108,12 +110,19 @@ export default class ParkingLotHomeContainer extends Component {
     }
   }
 
+  getAllOrders() {
+    if (this.state.user === null) return;
+    BookingApi.getAllOrders(this.state.user.id).then((response) => {
+      this.setState({ orders: response.data });
+    });
+  }
+
   render() {
     return (
       <>
         <Row>
           <Col span={24}>
-            <ParkingLotHomeHeaderContainer setUser={this.setUser} />
+            <ParkingLotHomeHeaderContainer setUser={this.setUser} orders={this.state.orders}/>
           </Col>
         </Row>
         <Row>
@@ -130,6 +139,7 @@ export default class ParkingLotHomeContainer extends Component {
             <ParkingLotHomeMainContentContainer
               selectedParkingLot={this.state.selectedItem}
               user={this.state.user}
+              onBookedLot={this.props.onBookedLot}
             />
           </Col>
         </Row>
