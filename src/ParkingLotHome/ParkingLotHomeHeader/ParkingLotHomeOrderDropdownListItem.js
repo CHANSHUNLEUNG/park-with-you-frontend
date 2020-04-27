@@ -49,7 +49,7 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
               {order.parkingLotName + " - " + order.parkingPlaceName}
             </Title>
             <p>{order.address}</p>
-            <p>Price: {order.unitPrice}</p>
+            <p>Price: {order.unitPrice * (parseFloat(order.duration)/3600)}</p>
           </Col>
           <Col span={6}>
             <div>
