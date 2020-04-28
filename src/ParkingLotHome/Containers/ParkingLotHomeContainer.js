@@ -142,7 +142,7 @@ export default class ParkingLotHomeContainer extends Component {
               <ParkingLotHomeMainContentContainer
                 selectedParkingLot={this.state.selectedItem}
                 user={this.state.user}
-                onBookedLot={this.props.onBookedLot}
+                onBookedLot={this.getAllOrders}
               />
             </Col>
           ) : null}
