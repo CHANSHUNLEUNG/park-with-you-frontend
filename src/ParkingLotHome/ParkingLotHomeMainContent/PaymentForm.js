@@ -53,7 +53,8 @@ export default class PaymentForm extends Component {
       parkingLot.id,
       customer.id,
       startingTime,
-      duration
+      duration,
+      customer.coupon ? customer.coupon.id : null
     )
       .then((response) => {
         this.setState({
@@ -66,7 +67,7 @@ export default class PaymentForm extends Component {
           } with start time ${startingTime.format("HH:mm")}`,
           icon: <SmileOutlined style={{ color: "#52c41a" }} />,
         });
-        this.props.onBookedLot()
+        this.props.onBookedLot();
       })
       .catch((error) => {
         const response = error.response.data;
@@ -98,7 +99,8 @@ export default class PaymentForm extends Component {
   }
 
   render() {
-    const { parkingLot } = this.props;
+    const { parkingLot, customer } = this.props;
+    const discount = customer && customer.coupon ? customer.coupon.discount : 0;
     return (
       <div>
         <Typography.Title style={{ textAlign: "center" }}>
@@ -133,7 +135,18 @@ export default class PaymentForm extends Component {
             Hours
           </div>
           <div style={{ textAlign: "right" }}>
-            <p>Total Price: ${parkingLot.unitPrice * this.state.duration} </p>
+            {discount > 0 ? (
+              <>
+                <p>
+                  Original Price: ${parkingLot.unitPrice * this.state.duration}{" "}
+                </p>
+                <p>Discount: -${discount}</p>
+              </>
+            ) : null}
+            <p>
+              Total Price: $
+              {parkingLot.unitPrice * this.state.duration - discount}{" "}
+            </p>
           </div>
         </Card>
         <div style={{ textAlign: "right", marginTop: "24px" }}>
