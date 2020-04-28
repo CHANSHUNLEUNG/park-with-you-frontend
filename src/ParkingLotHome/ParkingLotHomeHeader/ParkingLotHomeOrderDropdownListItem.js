@@ -87,7 +87,9 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
             </Title>
             <span>{order.address}</span>
             <p>
-              Total Price: ${order.unitPrice * (parseFloat(order.duration) / 3600).toFixed(2)}
+              Total Price: $
+              {order.unitPrice * (parseFloat(order.duration) / 3600).toFixed(2)}{" "}
+              {order.discountAmount > 0 ? "-" + order.discountAmount : ""}
             </p>
           </Col>
         </Row>
@@ -118,8 +120,17 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
             ) : (
               <div>
                 <span>Extend (Hours):&nbsp;</span>
-              <InputNumber min={1} defaultValue={1} onChange={this.onDurationChange}/>
-              <Button shape="circle" icon={<CheckOutlined />} size="small" onClick={this.onExtendButtonClick}/>
+                <InputNumber
+                  min={1}
+                  defaultValue={1}
+                  onChange={this.onDurationChange}
+                />
+                <Button
+                  shape="circle"
+                  icon={<CheckOutlined />}
+                  size="small"
+                  onClick={this.onExtendButtonClick}
+                />
               </div>
             )}
           </Col>
