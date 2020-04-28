@@ -137,12 +137,15 @@ export default class ParkingLotHomeContainer extends Component {
   }
 
   onBookedLot(usedCoupon) {
-    this.getAllOrders()
+    console.log(usedCoupon)
     if (usedCoupon) {
       const user = this.state.user;
-      user.availableCouponCount = user.availableCount - 1;
+      console.log(user.availableCouponCount)
+      user.availableCouponCount--;
+      console.log(user.availableCouponCount)
       this.setState({ user });
     }
+    this.getAllOrders();
   }
 
   render() {
