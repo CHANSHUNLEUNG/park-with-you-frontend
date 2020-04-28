@@ -53,8 +53,7 @@ export default class PaymentForm extends Component {
       parkingLot.id,
       customer.id,
       startingTime,
-      duration,
-      customer.coupon ? customer.coupon.id : null
+      duration
     )
       .then((response) => {
         this.setState({
@@ -100,7 +99,7 @@ export default class PaymentForm extends Component {
 
   render() {
     const { parkingLot, customer } = this.props;
-    const discount = customer && customer.coupon ? customer.coupon.discount : 0;
+    const discount = customer.availableCouponCount > 0 ? customer.discount : 0;
     return (
       <div>
         <Typography.Title style={{ textAlign: "center" }}>
@@ -138,7 +137,7 @@ export default class PaymentForm extends Component {
             {discount > 0 ? (
               <>
                 <p>
-                  Original Price: ${parkingLot.unitPrice * this.state.duration}{" "}
+                  Original Price: ${parkingLot.unitPrice * this.state.duration}
                 </p>
                 <p>Discount: -${discount}</p>
               </>
