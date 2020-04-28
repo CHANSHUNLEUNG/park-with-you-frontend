@@ -53,3 +53,8 @@
 .order-button{
   width: 150px;
 }
+
+.displayedUserIcon{
+  height: 100px;
+  width: 100px;
+}

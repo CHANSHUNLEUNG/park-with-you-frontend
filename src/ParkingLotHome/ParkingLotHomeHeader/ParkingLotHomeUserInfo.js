@@ -3,6 +3,7 @@ import "./ParkingLotHomeHeader.css";
 import sha256 from "sha256";
 import { Button, Modal, Input, message } from "antd";
 import axios from "axios";
+import cat from "../images/CAT.JPG";
 import { BACKEND_HOST_URL , UPDATE_USER_INFO, CUSTOMER_INFO_PATH} from "../Constants/Constant";
 
 export default class ParkingLotHomeUserInfo extends Component {
@@ -113,7 +114,7 @@ export default class ParkingLotHomeUserInfo extends Component {
 
   saveUpdatedInfoToDatabase(updatedUserInfo) {
     console.log("hi there")
-    var updateInfoLink =BACKEND_HOST_URL + CUSTOMER_INFO_PATH + "/" + updatedUserInfo.id + UPDATE_USER_INFO
+    var updateInfoLink =BACKEND_HOST_URL + CUSTOMER_INFO_PATH + "/" + updatedUserInfo.id ;
     axios
       .put(updateInfoLink, updatedUserInfo)
       .then((response) => {
@@ -147,6 +148,7 @@ export default class ParkingLotHomeUserInfo extends Component {
             </Button>,
           ]}
         >
+          <img src={cat} className="displayedUserIcon"/><br /><br />
           user ID : {this.props.user.id}
           <br />
           Name : {this.props.user.name}
