@@ -8,7 +8,7 @@ export default class ParkingLotHomeOrderDropdown extends Component {
         return (
             <>
                 <Dropdown trigger="click" overlayClassName="order-dropdown-root"
-                    overlay={<ParkingLotHomeOrderDropdownList orders={this.props.orders} />} placement="topCenter">
+                    overlay={<ParkingLotHomeOrderDropdownList orders={this.props.orders} />} placement="bottomCenter">
                     <Button className="order-button" shape="round" icon={<ShoppingCartOutlined />}>Order</Button>
                 </Dropdown>
             </>
