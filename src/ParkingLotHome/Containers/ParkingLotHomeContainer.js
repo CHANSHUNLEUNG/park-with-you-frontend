@@ -9,9 +9,12 @@ import {
   BACKEND_HOST_URL,
   PARKING_LOT_INFO_PATH,
   SEARCH_BY_REGION,
-  TEST_PARKING_LOT_LIST
+  TEST_PARKING_LOT_LIST,
+  SHARE_LINK_PATHNAME,
+  SHARE_LINK_PARAMETER_NAME,
 } from "../Constants/Constant";
 import BookingApi from "../apis/BookingApi";
+import CouponApi from "../apis/CouponApi";
 
 export default class ParkingLotHomeContainer extends Component {
   constructor(props) {
@@ -28,6 +31,7 @@ export default class ParkingLotHomeContainer extends Component {
     this.onListItemClicked = this.onListItemClicked.bind(this);
     this.setUser = this.setUser.bind(this);
     this.getAllOrders = this.getAllOrders.bind(this);
+    this.checkSharedCoupon = this.checkSharedCoupon.bind(this);
 
     this.state = {
       parkingLotsInfo: [],
@@ -38,14 +42,15 @@ export default class ParkingLotHomeContainer extends Component {
   }
 
   componentDidMount() {
+    this.checkSharedCoupon();
     // static test
-    this.setState({
-      parkingLotsInfo: TEST_PARKING_LOT_LIST
-    },() => this.sortParkingLotsByPrice());
+    // this.setState({
+    //   parkingLotsInfo: TEST_PARKING_LOT_LIST
+    // },() => this.sortParkingLotsByPrice());
 
     // production
-    // this.updateParkingLotsInfo();
-    // this.sortParkingLotsByPrice();
+    this.updateParkingLotsInfo();
+    this.sortParkingLotsByPrice();
   }
 
   sortParkingLotsByPrice() {
@@ -117,6 +122,17 @@ export default class ParkingLotHomeContainer extends Component {
     BookingApi.getAllOrders(this.state.user.id).then((response) => {
       this.setState({ orders: response.data });
     });
+  }
+
+  checkSharedCoupon() {
+    const { pathname, search } = window.location;
+    if (pathname !== SHARE_LINK_PATHNAME) return;
+    let parameters = search.replace("?", "").split("&");
+    const couponParameter = parameters.find((parameter) =>
+      parameter.startsWith(SHARE_LINK_PARAMETER_NAME)
+    );
+    if (!couponParameter) return;
+    CouponApi.activateCoupon(couponParameter.split("=")[1]);
   }
 
   render() {

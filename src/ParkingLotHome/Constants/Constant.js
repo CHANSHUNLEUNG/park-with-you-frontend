@@ -12,4 +12,7 @@ export const SORT_BY_PRICE = "price";
 export const USER_NAME_INIT_STATE = "Register";
 export const SEARCH_BY_REGION = "?region=";
 export const UPDATE_USER_INFO = "/update";
+export const COUPONS_PATH = '/coupons';
+export const SHARE_LINK_PATHNAME = '/coupons';
+export const SHARE_LINK_PARAMETER_NAME = 'coupon';
 
