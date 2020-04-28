@@ -213,6 +213,7 @@ export default class ParkingLotHomeHeader extends Component {
                       userInfoModalVisible={this.state.userInfoModalVisible}
                       closeUserInfoModal={this.closeUserInfoModal}
                       user = {this.state.user}
+                      setUser={this.setUser}
                     />
                     <ParkingLotHomeRegister
                       registerModalVisible={this.state.registerModalVisible}

@@ -79,6 +79,9 @@ export default class ParkingLotHomeUserInfo extends Component {
     var bankAccountValid = regex.test(this.state.newBankAccountInfo);
     var updateUser = {};
     console.log(updateUser);
+    if (this.state.newUserName === "") {
+      message.info("User name cannot be empty. ");
+    }
     if (this.state.newPassword !== this.state.confirmPassword) {
       message.info("please confirm your password again. ");
     }
@@ -87,7 +90,7 @@ export default class ParkingLotHomeUserInfo extends Component {
     }
     if (
       this.state.newPassword === this.state.confirmPassword &&
-      bankAccountValid
+      bankAccountValid && this.state.newUserName !== ""
     ) {
       updateUser = {
         id: this.props.user.id,
@@ -111,7 +114,9 @@ export default class ParkingLotHomeUserInfo extends Component {
       .then((response) => {
         if (response.status === 200) {
           message.info("updated account information successfully. ");
+          this.props.setUser(updatedUserInfo)
           this.closeUpdateInfoModal();
+
         }
       })
       .catch(() => {
