@@ -71,7 +71,7 @@ export default class PaymentForm extends Component {
         this.props.onBookedLot();
         CouponApi.getShareLink(customer.id, response.data.orderId).then(
           (shareLinkResponse) => {
-            this.setState({ shareLink: response.data.shareLink });
+            this.setState({ shareLink: shareLinkResponse.data.shareLink });
           }
         );
       })

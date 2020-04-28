@@ -10,6 +10,7 @@ export default class ShareLinkModal extends Component {
 
     this.state = {
       loading: false,
+      host: window.location.host
     };
   }
 
@@ -50,7 +51,7 @@ export default class ShareLinkModal extends Component {
             <br />
             <Input
               addonAfter={<CopyOutlined />}
-              defaultValue={this.props.shareLink}
+              defaultValue={this.state.host + this.props.shareLink}
             />
           </div>
           <div>
