@@ -77,12 +77,14 @@ export default class ParkingLotHomeUserInfo extends Component {
   onUpdateAccountInfo() {
     var regex = /^[0-9]{3}[-][0-9]{3}[-][0-9]{3}?$/;
     var bankAccountValid = regex.test(this.state.newBankAccountInfo);
-    var updateUser = {};
+    var updateUser = {}; 
+    var anyFieldEmpty = this.state.newUserName ==="" || this.state.newPassword ==="" || this.state.newBankAccountInfo==="";
     var allInputValid = this.state.newPassword === this.state.confirmPassword &&
-    bankAccountValid && this.state.newUserName !== "";
+    bankAccountValid && (!anyFieldEmpty);
+   
     console.log(updateUser);
-    if (this.state.newUserName === "") {
-      message.info("User name cannot be empty. ");
+    if (anyFieldEmpty) {
+      message.info("All fields should not be empty. ");
     }
     if (this.state.newPassword !== this.state.confirmPassword) {
       message.info("please confirm your password again. ");
