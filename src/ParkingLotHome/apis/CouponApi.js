@@ -6,7 +6,7 @@ class CouponApi {
   }
 
   static getShareLink(customerId, orderId) {
-    return axios.get(BACKEND_HOST_URL + GET_SHARE_LINK_PATH, {
+    return axios.get(BACKEND_HOST_URL + COUPONS_PATH + GET_SHARE_LINK_PATH, {
       params: { customerId, orderId },
     });
   }
