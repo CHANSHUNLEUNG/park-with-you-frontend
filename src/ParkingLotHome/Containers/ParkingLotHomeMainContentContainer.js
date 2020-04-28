@@ -16,7 +16,6 @@ export default class ParkingLotHomeMainContentContainer extends Component {
     const { selectedParkingLot, user } = this.props;
     return (
       <div style={{ padding: "24px" }}>
-        {selectedParkingLot ? (
           <div>
             <ParkingLotDetails parkingLot={selectedParkingLot} />
             <PaymentForm
@@ -25,7 +24,6 @@ export default class ParkingLotHomeMainContentContainer extends Component {
               onBookedLot={this.props.onBookedLot}
             />
           </div>
-        ) : null}
       </div>
     );
   }

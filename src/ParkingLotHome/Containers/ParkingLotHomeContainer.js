@@ -39,13 +39,13 @@ export default class ParkingLotHomeContainer extends Component {
 
   componentDidMount() {
     // static test
-    // this.setState({
-    //   parkingLotsInfo: TEST_PARKING_LOT_LIST
-    // },() => this.sortParkingLotsByPrice());
+    this.setState({
+      parkingLotsInfo: TEST_PARKING_LOT_LIST
+    },() => this.sortParkingLotsByPrice());
 
     // production
-    this.updateParkingLotsInfo();
-    this.sortParkingLotsByPrice();
+    // this.updateParkingLotsInfo();
+    // this.sortParkingLotsByPrice();
   }
 
   sortParkingLotsByPrice() {
@@ -76,8 +76,8 @@ export default class ParkingLotHomeContainer extends Component {
     axios.get(BACKEND_HOST_URL + PARKING_LOT_INFO_PATH).then((response) => {
       response.status === 200
         ? this.setState({
-            parkingLotsInfo: response.data,
-          })
+          parkingLotsInfo: response.data,
+        })
         : console.log("Error, cannot get parking lots info");
     });
   }
@@ -98,15 +98,15 @@ export default class ParkingLotHomeContainer extends Component {
       axios
         .get(
           BACKEND_HOST_URL +
-            PARKING_LOT_INFO_PATH +
-            SEARCH_BY_REGION +
-            inputValue.trim()
+          PARKING_LOT_INFO_PATH +
+          SEARCH_BY_REGION +
+          inputValue.trim()
         )
         .then((response) => {
           response.status === 200
             ? this.setState({
-                parkingLotsInfo: response.data,
-              })
+              parkingLotsInfo: response.data,
+            })
             : console.log("Error, cannot get parking lots info");
         });
     }
@@ -124,7 +124,7 @@ export default class ParkingLotHomeContainer extends Component {
       <>
         <Row>
           <Col span={24}>
-            <ParkingLotHomeHeaderContainer setUser={this.setUser} orders={this.state.orders}/>
+            <ParkingLotHomeHeaderContainer setUser={this.setUser} orders={this.state.orders} />
           </Col>
         </Row>
         <Row>
@@ -137,13 +137,15 @@ export default class ParkingLotHomeContainer extends Component {
               updateListBySearchedRegion={this.updateListBySearchedRegion}
             />
           </Col>
-          <Col span={14}>
-            <ParkingLotHomeMainContentContainer
-              selectedParkingLot={this.state.selectedItem}
-              user={this.state.user}
-              onBookedLot={this.props.onBookedLot}
-            />
-          </Col>
+          {(this.state.selectedItem) ? (
+            <Col span={14}>
+              <ParkingLotHomeMainContentContainer
+                selectedParkingLot={this.state.selectedItem}
+                user={this.state.user}
+                onBookedLot={this.props.onBookedLot}
+              />
+            </Col>
+          ) : null}
         </Row>
       </>
     );
