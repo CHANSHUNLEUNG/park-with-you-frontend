@@ -87,7 +87,7 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
             </Title>
             <span>{order.address}</span>
             <p>
-              Price: ${order.unitPrice * (parseFloat(order.duration) / 3600)}
+              Price: ${order.unitPrice * (parseFloat(order.duration) / 3600).toFixed(2)}
             </p>
           </Col>
         </Row>
