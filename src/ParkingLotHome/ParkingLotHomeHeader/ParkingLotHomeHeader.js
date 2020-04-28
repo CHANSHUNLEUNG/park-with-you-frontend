@@ -4,7 +4,7 @@ import cat from "../images/CAT.JPG";
 import userIcon from "../images/userIcon.png";
 import "./ParkingLotHomeHeader.css";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Row, Col, Layout, Button, Popconfirm, message } from "antd";
+import { Row, Col, Layout, Button, Popconfirm, message, Badge } from "antd";
 import { USER_NAME_INIT_STATE } from "../Constants/Constant";
 import ParkingLotHomeLogin from "./ParkingLotHomeLogin";
 import ParkingLotHomeUserInfo from "./ParkingLotHomeUserInfo";
@@ -223,7 +223,9 @@ export default class ParkingLotHomeHeader extends Component {
                       registerSuccess = {this.registerSuccess}
                     />
                     <div className="order-dropdown">
-                      <ParkingLotHomeOrderDropdown orders={this.props.orders} />
+                      <Badge count={this.props.orders.length}>
+                        <ParkingLotHomeOrderDropdown orders={this.props.orders} />
+                      </Badge>
                     </div>
                   </div>
                 </Col>
