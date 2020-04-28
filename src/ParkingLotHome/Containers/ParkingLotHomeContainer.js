@@ -9,6 +9,7 @@ import {
   BACKEND_HOST_URL,
   PARKING_LOT_INFO_PATH,
   SEARCH_BY_REGION,
+  TEST_PARKING_LOT_LIST
 } from "../Constants/Constant";
 import BookingApi from "../apis/BookingApi";
 
@@ -32,7 +33,7 @@ export default class ParkingLotHomeContainer extends Component {
       parkingLotsInfo: [],
       selectedItem: null,
       user: null,
-      orders: []
+      orders: [],
     };
   }
 
@@ -44,6 +45,7 @@ export default class ParkingLotHomeContainer extends Component {
 
     // production
     this.updateParkingLotsInfo();
+    this.sortParkingLotsByPrice();
   }
 
   sortParkingLotsByPrice() {
@@ -126,7 +128,7 @@ export default class ParkingLotHomeContainer extends Component {
           </Col>
         </Row>
         <Row>
-          <Col span={10}>
+          <Col span={(this.state.selectedItem) ? 10 : 24}>
             <ParkingLotHomeBodyContainer
               sortParkingLotsByPrice={this.sortParkingLotsByPrice}
               sortParkingLotsByAvailable={this.sortParkingLotsByAvailable}
