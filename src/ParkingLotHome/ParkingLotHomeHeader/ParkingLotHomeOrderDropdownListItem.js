@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Row, Col, InputNumber, Button, Typography } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { CheckOutlined } from "@ant-design/icons";
 import moment from "moment";
 import BookingApi from "../apis/BookingApi";
 
@@ -83,11 +83,11 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
         <Row>
           <Col span={18}>
             <Title level={4}>
-              {order.parkingLotName + " - " + order.parkingPlaceName}
+              {`[#${order.orderId}] ${order.parkingLotName} - ${order.parkingPlaceName}`}
             </Title>
             <span>{order.address}</span>
             <p>
-              Price: ${order.unitPrice * (parseFloat(order.duration) / 3600).toFixed(2)}
+              Total Price: ${order.unitPrice * (parseFloat(order.duration) / 3600).toFixed(2)}
             </p>
           </Col>
         </Row>
@@ -117,9 +117,9 @@ export default class ParkingLotHomeOrderDropdownListItem extends Component {
               </svg>
             ) : (
               <div>
-                Extend:&nbsp;
+                <span>Extend (Hours):&nbsp;</span>
               <InputNumber min={1} defaultValue={1} onChange={this.onDurationChange}/>
-              <Button shape="circle" icon={<PlusOutlined />} size="small" onClick={this.onExtendButtonClick}/>
+              <Button shape="circle" icon={<CheckOutlined />} size="small" onClick={this.onExtendButtonClick}/>
               </div>
             )}
           </Col>
