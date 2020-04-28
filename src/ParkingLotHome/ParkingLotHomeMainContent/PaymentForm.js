@@ -13,6 +13,7 @@ import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import moment from "moment";
 import BookingApi from "../apis/BookingApi";
 import ShareLinkModal from "./ShareLinkModal";
+import CouponApi from "../apis/CouponApi";
 
 const format = "HH:mm";
 
@@ -37,6 +38,7 @@ export default class PaymentForm extends Component {
       startingTime: moment(),
       paymentSuccess: false,
       shareLinkModalVisible: false,
+      shareLink: ''
     };
   }
 
@@ -67,6 +69,11 @@ export default class PaymentForm extends Component {
           icon: <SmileOutlined style={{ color: "#52c41a" }} />,
         });
         this.props.onBookedLot();
+        CouponApi.getShareLink(customer.id, response.data.orderId).then(
+          (shareLinkResponse) => {
+            this.setState({ shareLink: response.data.shareLink });
+          }
+        );
       })
       .catch((error) => {
         const response = error.response.data;
@@ -99,7 +106,7 @@ export default class PaymentForm extends Component {
 
   render() {
     const { parkingLot, customer } = this.props;
-    const discount = customer.availableCouponCount > 0 ? customer.discount : 0;
+    const discount = customer && customer.availableCouponCount > 0 ? customer.discount : 0;
     return (
       <div>
         <Typography.Title style={{ textAlign: "center" }}>
@@ -165,6 +172,7 @@ export default class PaymentForm extends Component {
             Share Link To Get Coupon
           </Button>{" "}
           <ShareLinkModal
+            shareLink={this.state.shareLink}
             shareLinkModalVisible={this.state.shareLinkModalVisible}
             showShareLinkModal={this.showShareLinkModal}
           />

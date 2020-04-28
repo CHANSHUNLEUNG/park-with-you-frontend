@@ -50,7 +50,7 @@ export default class ShareLinkModal extends Component {
             <br />
             <Input
               addonAfter={<CopyOutlined />}
-              defaultValue="https://www.park-with-you.com"
+              defaultValue={this.props.shareLink}
             />
           </div>
           <div>

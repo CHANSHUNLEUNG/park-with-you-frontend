@@ -15,4 +15,5 @@ export const UPDATE_USER_INFO = "/update";
 export const COUPONS_PATH = '/coupons';
 export const SHARE_LINK_PATHNAME = '/coupons';
 export const SHARE_LINK_PARAMETER_NAME = 'coupon';
+export const GET_SHARE_LINK_PATH = '/share-link';
 
