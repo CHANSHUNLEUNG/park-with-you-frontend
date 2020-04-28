@@ -32,6 +32,7 @@ export default class ParkingLotHomeContainer extends Component {
     this.setUser = this.setUser.bind(this);
     this.getAllOrders = this.getAllOrders.bind(this);
     this.checkSharedCoupon = this.checkSharedCoupon.bind(this);
+    this.onBookedLot = this.onBookedLot.bind(this);
 
     this.state = {
       parkingLotsInfo: [],
@@ -135,6 +136,15 @@ export default class ParkingLotHomeContainer extends Component {
     CouponApi.activateCoupon(couponParameter.split("=")[1]);
   }
 
+  onBookedLot(usedCoupon) {
+    this.getAllOrders()
+    if (usedCoupon) {
+      const user = this.state.user;
+      user.availableCouponCount = user.availableCount - 1;
+      this.setState({ user });
+    }
+  }
+
   render() {
     return (
       <>
@@ -158,7 +168,7 @@ export default class ParkingLotHomeContainer extends Component {
               <ParkingLotHomeMainContentContainer
                 selectedParkingLot={this.state.selectedItem}
                 user={this.state.user}
-                onBookedLot={this.getAllOrders}
+                onBookedLot={this.onBookedLot}
               />
             </Col>
           ) : null}

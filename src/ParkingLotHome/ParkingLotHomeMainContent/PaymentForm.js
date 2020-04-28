@@ -8,8 +8,9 @@ import {
   Typography,
   Alert,
   notification,
+  Badge,
 } from "antd";
-import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
+import { FrownOutlined, SmileOutlined, CreditCardOutlined } from "@ant-design/icons";
 import moment from "moment";
 import BookingApi from "../apis/BookingApi";
 import ShareLinkModal from "./ShareLinkModal";
@@ -68,7 +69,7 @@ export default class PaymentForm extends Component {
           } with start time ${startingTime.format("HH:mm")}`,
           icon: <SmileOutlined style={{ color: "#52c41a" }} />,
         });
-        this.props.onBookedLot();
+        this.props.onBookedLot(this.props.customer.availableCouponCount > 0);
         CouponApi.getShareLink(customer.id, response.data.orderId).then(
           (shareLinkResponse) => {
             this.setState({ shareLink: shareLinkResponse.data.shareLink });
@@ -108,8 +109,9 @@ export default class PaymentForm extends Component {
     const { parkingLot, customer } = this.props;
     const discount = customer && customer.availableCouponCount > 0 ? customer.discount : 0;
     return (
-      <div>
-        <Typography.Title style={{ textAlign: "center" }}>
+      <div style={{ marginTop: "24px" }}>
+        <Typography.Title style={{ textAlign: "center" }} level={2}>
+          <CreditCardOutlined />&nbsp;
           Payment
         </Typography.Title>
         <Card>
@@ -120,7 +122,8 @@ export default class PaymentForm extends Component {
               type="warning"
               showIcon
             />
-          ) : null}
+          ) : <Alert message={`You have ${customer.availableCouponCount} coupon(s).`} type="info" />}
+          
           <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
             From:&nbsp;
             <TimePicker
