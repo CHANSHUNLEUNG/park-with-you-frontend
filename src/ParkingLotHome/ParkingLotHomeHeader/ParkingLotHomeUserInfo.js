@@ -4,7 +4,11 @@ import sha256 from "sha256";
 import { Button, Modal, Input, message } from "antd";
 import axios from "axios";
 import cat from "../images/CAT.JPG";
-import { BACKEND_HOST_URL , UPDATE_USER_INFO, CUSTOMER_INFO_PATH} from "../Constants/Constant";
+import {
+  BACKEND_HOST_URL,
+  UPDATE_USER_INFO,
+  CUSTOMER_INFO_PATH,
+} from "../Constants/Constant";
 
 export default class ParkingLotHomeUserInfo extends Component {
   constructor(props) {
@@ -78,11 +82,16 @@ export default class ParkingLotHomeUserInfo extends Component {
   onUpdateAccountInfo() {
     var regex = /^[0-9]{3}[-][0-9]{3}[-][0-9]{3}?$/;
     var bankAccountValid = regex.test(this.state.newBankAccountInfo);
-    var updateUser = {}; 
-    var anyFieldEmpty = this.state.newUserName ==="" || this.state.newPassword ==="" || this.state.newBankAccountInfo==="";
-    var allInputValid = this.state.newPassword === this.state.confirmPassword &&
-    bankAccountValid && (!anyFieldEmpty);
-   
+    var updateUser = {};
+    var anyFieldEmpty =
+      this.state.newUserName === "" ||
+      this.state.newPassword === "" ||
+      this.state.newBankAccountInfo === "";
+    var allInputValid =
+      this.state.newPassword === this.state.confirmPassword &&
+      bankAccountValid &&
+      !anyFieldEmpty;
+
     console.log(updateUser);
     if (anyFieldEmpty) {
       message.info("All fields should not be empty. ");
@@ -106,27 +115,27 @@ export default class ParkingLotHomeUserInfo extends Component {
         confirmPassword: "",
         newPassword: "",
         newUserName: "",
-      }); 
+      });
       this.saveUpdatedInfoToDatabase(updateUser);
     }
     console.log(updateUser);
   }
 
   saveUpdatedInfoToDatabase(updatedUserInfo) {
-    console.log("hi there")
-    var updateInfoLink =BACKEND_HOST_URL + CUSTOMER_INFO_PATH + "/" + updatedUserInfo.id ;
+    console.log("hi there");
+    var updateInfoLink =
+      BACKEND_HOST_URL + CUSTOMER_INFO_PATH + "/" + updatedUserInfo.id;
     axios
       .put(updateInfoLink, updatedUserInfo)
       .then((response) => {
         if (response.status === 200) {
           message.info("updated account information successfully. ");
-          this.props.setUser(updatedUserInfo)
+          this.props.setUser(updatedUserInfo);
           this.closeUpdateInfoModal();
-
         }
       })
       .catch(() => {
-        console.log("Error, cannot updat customer info");
+        console.log("Error, cannot update customer info");
       });
   }
 
@@ -148,7 +157,9 @@ export default class ParkingLotHomeUserInfo extends Component {
             </Button>,
           ]}
         >
-          <img src={cat} className="displayedUserIcon"/><br /><br />
+          <img src={cat} className="displayedUserIcon" />
+          <br />
+          <br />
           user ID : {this.props.user.id}
           <br />
           Name : {this.props.user.name}
