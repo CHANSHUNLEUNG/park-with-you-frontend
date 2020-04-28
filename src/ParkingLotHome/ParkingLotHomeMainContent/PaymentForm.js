@@ -35,7 +35,7 @@ export default class PaymentForm extends Component {
     this.state = {
       duration: 1,
       startingTime: moment(),
-      paymentSuccess: true,
+      paymentSuccess: false,
       shareLinkModalVisible: false,
     };
   }
