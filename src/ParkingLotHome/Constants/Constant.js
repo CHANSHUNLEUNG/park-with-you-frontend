@@ -11,4 +11,5 @@ export const SORT_BY_AVAILABLE = "available";
 export const SORT_BY_PRICE = "price";
 export const USER_NAME_INIT_STATE = "Register";
 export const SEARCH_BY_REGION = "?region=";
+export const UPDATE_USER_INFO = "/update";
 

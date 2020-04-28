@@ -3,7 +3,7 @@ import "./ParkingLotHomeHeader.css";
 import sha256 from "sha256";
 import { Button, Modal, Input, message } from "antd";
 import axios from "axios";
-import { BACKEND_HOST_URL } from "../Constants/Constant";
+import { BACKEND_HOST_URL , UPDATE_USER_INFO, CUSTOMER_INFO_PATH} from "../Constants/Constant";
 
 export default class ParkingLotHomeUserInfo extends Component {
   constructor(props) {
@@ -75,7 +75,7 @@ export default class ParkingLotHomeUserInfo extends Component {
   }
 
   onUpdateAccountInfo() {
-    var regex = /^[0-9]{3}[\-][0-9]{3}[\-][0-9]{3}?$/;
+    var regex = /^[0-9]{3}[-][0-9]{3}[-][0-9]{3}?$/;
     var bankAccountValid = regex.test(this.state.newBankAccountInfo);
     var updateUser = {};
     console.log(updateUser);
@@ -98,13 +98,16 @@ export default class ParkingLotHomeUserInfo extends Component {
       this.setState({
         updatedUserInfo: updateUser,
       });
+      this.saveUpdatedInfoToDatabase(updateUser);
     }
     console.log(updateUser);
   }
 
-  saveUpdatedInfoToDatabase() {
+  saveUpdatedInfoToDatabase(updatedUserInfo) {
+    console.log("hi there")
+    var updateInfoLink =BACKEND_HOST_URL + CUSTOMER_INFO_PATH + "/" + updatedUserInfo.id + UPDATE_USER_INFO
     axios
-      .put(BACKEND_HOST_URL, this.state.updatedUserInfo)
+      .put(updateInfoLink, updatedUserInfo)
       .then((response) => {
         if (response.status === 200) {
           message.info("updated account information successfully. ");
