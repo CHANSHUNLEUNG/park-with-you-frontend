@@ -78,6 +78,8 @@ export default class ParkingLotHomeUserInfo extends Component {
     var regex = /^[0-9]{3}[-][0-9]{3}[-][0-9]{3}?$/;
     var bankAccountValid = regex.test(this.state.newBankAccountInfo);
     var updateUser = {};
+    var allInputValid = this.state.newPassword === this.state.confirmPassword &&
+    bankAccountValid && this.state.newUserName !== "";
     console.log(updateUser);
     if (this.state.newUserName === "") {
       message.info("User name cannot be empty. ");
@@ -88,10 +90,7 @@ export default class ParkingLotHomeUserInfo extends Component {
     if (!bankAccountValid) {
       message.info("please input a valid bank account. ");
     }
-    if (
-      this.state.newPassword === this.state.confirmPassword &&
-      bankAccountValid && this.state.newUserName !== ""
-    ) {
+    if (allInputValid) {
       updateUser = {
         id: this.props.user.id,
         name: this.state.newUserName,
@@ -100,7 +99,11 @@ export default class ParkingLotHomeUserInfo extends Component {
       };
       this.setState({
         updatedUserInfo: updateUser,
-      });
+        newBankAccountInfo: "",
+        confirmPassword: "",
+        newPassword: "",
+        newUserName: "",
+      }); 
       this.saveUpdatedInfoToDatabase(updateUser);
     }
     console.log(updateUser);
