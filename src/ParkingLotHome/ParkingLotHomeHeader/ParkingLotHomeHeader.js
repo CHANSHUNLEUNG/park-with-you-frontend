@@ -75,6 +75,7 @@ export default class ParkingLotHomeHeader extends Component {
     });
     this.props.setUser(null);
     this.clearUserName();
+    window.location.reload();
   }
 
   showLoginModal() {
