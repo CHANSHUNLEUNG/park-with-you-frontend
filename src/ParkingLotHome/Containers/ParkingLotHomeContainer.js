@@ -126,8 +126,7 @@ export default class ParkingLotHomeContainer extends Component {
   }
 
   checkSharedCoupon() {
-    const { pathname, search } = window.location;
-    if (pathname !== SHARE_LINK_PATHNAME) return;
+    const { search } = window.location;
     let parameters = search.replace("?", "").split("&");
     const couponParameter = parameters.find((parameter) =>
       parameter.startsWith(SHARE_LINK_PARAMETER_NAME)
