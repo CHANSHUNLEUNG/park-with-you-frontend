@@ -122,7 +122,7 @@ export default class PaymentForm extends Component {
               type="warning"
               showIcon
             />
-          ) : <Alert message={`You have ${customer.availableCouponCount} coupon(s).`} type="info" />}
+          ) : <Alert message={`You have ${customer.availableCouponCount || 0} coupon(s).`} type="info" />}
           
           <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
             From:&nbsp;
