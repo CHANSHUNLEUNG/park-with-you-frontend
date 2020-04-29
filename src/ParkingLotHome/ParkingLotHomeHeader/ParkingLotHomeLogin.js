@@ -49,8 +49,9 @@ export default class ParkingLotHomeLogin extends Component {
 
   checkIsUser() {
     const BACK_END_USER_LOGIN_URL =
-      BACKEND_HOST_URL + CUSTOMER_INFO_PATH +"/" + this.state.usernameInput + "/login";
+      BACKEND_HOST_URL + CUSTOMER_INFO_PATH + "/login";
     const passwordRequest = {
+      userName: this.state.usernameInput,
       password: this.state.passwordInput,
     };
     axios
