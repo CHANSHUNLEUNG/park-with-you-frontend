@@ -72,9 +72,10 @@ export default class ParkingLotHomeBodyListHeader extends Component {
               value={this.state.sortBy}
               onChange={this.handleSortMethodChange}
             >
-              <Radio.Button value={SORT_BY_NAME}>Name</Radio.Button>
               <Radio.Button value={SORT_BY_AVAILABLE}>Available</Radio.Button>
               <Radio.Button value={SORT_BY_PRICE}>Price</Radio.Button>
+              <Radio.Button>Distance</Radio.Button>
+              <Radio.Button>Name</Radio.Button>
             </Radio.Group>
           </Col>
         </Row>

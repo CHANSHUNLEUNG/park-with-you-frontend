@@ -26,7 +26,7 @@ export default class ParkingLotHomeBodyListItem extends Component {
     return (
       <>
         <List.Item.Meta style={{cursor: "pointer"}} title={<a>{item.name}</a>} description={description} onClick={this.onClick}/>
-        {/* <Button type="primary" shape="circle" icon={<BookFilled />} /> */}
+        <Button type="primary" shape="circle" icon={<BookFilled />} />
       </>
     );
   }
